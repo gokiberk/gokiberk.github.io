@@ -14,7 +14,7 @@
            Graduated from Bilkent University Computer Engineering department in 2023.
         </p>
         <h2>
-            Experience:
+            Experience
         </h2>
         <ul>
             <li>Peaka(former Code2)</li>
