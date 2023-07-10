@@ -1,7 +1,7 @@
 # Gökberk Keskinkılıç
 
 ### Bio
-Graduate of B.Sc. in Computer Engineering at Bilkent University.
+Graduate of B.Sc. in Computer Engineering from Bilkent University.
 
 ### 👨🏻‍💻 Experience
 - Intern @Peaka (formerly Code2)
