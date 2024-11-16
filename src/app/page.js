@@ -6,7 +6,9 @@ export default function Page() {
   return (
     <div className="flex h-screen">
       {/* Sidebar with collapsible functionality */}
-      <SideMenu />
+      
+        <SideMenu />
+      
 
       {/* Main Content */}
       <main className="flex-1 overflow-y-auto">
