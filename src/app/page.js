@@ -4,6 +4,8 @@ import { SideMenu } from "@/components/SideMenu";
 import { PageTitle } from "@/components/PageTitle";
 import { BioDetail } from "@/components/BioDetail";
 import { useState, useEffect } from "react";
+import { imageConfigDefault } from "next/dist/shared/lib/image-config";
+import Head from 'next/head';
 
 export default function Page() {
   const [isMobile, setIsMobile] = useState(false);
@@ -22,6 +24,20 @@ export default function Page() {
   }, []);
 
   return (
+    <>
+      <Head>
+        <title>Gökberk Keskinkılıç</title>
+        <meta
+          name="description"
+          content="Gökberk Keskinkılıç's personal website."
+        />
+        <meta
+          property="og:description"
+          content="Gökberk Keskinkılıç's personal website."
+        />
+        <meta property="og:title" content="Gökberk Keskinkılıç" />
+        <meta property="og:image" content="/img/og-gokiberk.webp" />
+      </Head>    
     <div className="flex h-screen">
       {/* Sidebar with collapsible functionality */}
       <SideMenu
@@ -134,5 +150,6 @@ export default function Page() {
         </div>
       </main>
     </div>
+    </>
   );
 }
