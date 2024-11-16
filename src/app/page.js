@@ -1,17 +1,41 @@
+'use client';
+
 import { SideMenu } from "@/components/SideMenu";
 import { PageTitle } from "@/components/PageTitle";
 import { BioDetail } from "@/components/BioDetail";
+import { useState, useEffect } from "react";
 
 export default function Page() {
+  const [isMobile, setIsMobile] = useState(false);
+  const [isSidebarCollapsed, setIsSidebarCollapsed] = useState(false);
+
+  const handleResize = () => {
+    const mobile = window.innerWidth < 1300;
+    setIsMobile(mobile);
+    setIsSidebarCollapsed(mobile); // Automatically collapse sidebar on mobile
+  };
+
+  useEffect(() => {
+    handleResize(); // Check initial size
+    window.addEventListener("resize", handleResize); // Listen for resize events
+    return () => window.removeEventListener("resize", handleResize); // Cleanup
+  }, []);
+
   return (
     <div className="flex h-screen">
       {/* Sidebar with collapsible functionality */}
-      
-        <SideMenu />
-      
+      <SideMenu
+        isMobile={isMobile}
+        isCollapsed={isSidebarCollapsed}
+        onToggleCollapse={() => setIsSidebarCollapsed(!isSidebarCollapsed)}
+      />
 
       {/* Main Content */}
-      <main className="flex-1 overflow-y-auto">
+      <main
+        className={`flex-1 overflow-y-auto transition-all duration-300 ${
+          isMobile && isSidebarCollapsed ? "ml-16" : isMobile ? "ml-64" : ""
+        }`}
+      >
         <div className="p-8">
           <PageTitle title="Home" className="lg hidden" />
 
