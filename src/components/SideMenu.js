@@ -36,7 +36,7 @@ export const SideMenu = () => {
         {/* User Profile */}
         <Link href="/" className="flex flex-col items-center p-4">
           <img
-            src="/img/headshot.png"
+            src="/img/me.avif"
             alt="Gökberk Keskinkılıç"
             width={50}
             height={50}
