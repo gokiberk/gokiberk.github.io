@@ -4,7 +4,7 @@ import { useState, useEffect } from 'react';
 import Link from 'next/link';
 import { NavigationLink } from '@/components/NavigationLink';
 import { PROFILES, LINKS } from '@/lib/constants';
-import { FiMenu, FiX } from 'react-icons/fi';
+import { HamburgerMenu } from '@/components/HamburgerMenu';
 
 export const SideMenu = () => {
   const [isMobile, setIsMobile] = useState(false); // Track if the screen is small
@@ -29,89 +29,89 @@ export const SideMenu = () => {
     <>
       {/* Sidebar */}
       <aside
-        className={`fixed top-0 left-0 h-screen bg-gray-50 border-r border-gray-200 flex flex-col items-center transform transition-transform duration-300 z-40 ${
-          isCollapsed ? 'w-16' : 'w-64'
+        className={`fixed bg-gray-50 flex flex-col transform transition-transform duration-300 z-40 ${
+          isMobile
+            ? `bottom-0 inset-x-0 border-t border-gray-200 max-h-[90vh] overflow-y-auto rounded-t-lg ${isCollapsed ? 'translate-y-full' : ''}`
+            : `top-0 left-0 h-screen border-r border-gray-200 ${isCollapsed ? 'w-16' : 'w-64'}`
         }`}
       >
         {/* User Profile */}
-        <Link href="/" className="flex flex-col items-center p-4">
+        <div className={`flex items-center p-4 w-full ${isMobile ? '' : 'flex-col'}`}>
           <img
             src="/img/me.avif"
             alt="Gökberk Keskinkılıç"
-            width={50}
-            height={50}
-            className="rounded-full border shadow-sm"
+            width={isMobile ? 50 : 50}
+            height={isMobile ? 50 : 50}
+            className="rounded-full border shadow-sm flex-shrink-0"
           />
-          {!isCollapsed && (
-            <div className="flex flex-col mt-2 text-center">
-              <span className="font-semibold tracking-tight">Gökberk Keskinkılıç</span>
-              <span className="text-sm text-gray-600">Software Engineer</span>
+          {(!isCollapsed || isMobile) && (
+            <div className={`flex flex-col ml-4 ${isMobile ? '' : 'mt-2 text-center ml-0'} flex-grow`}>
+              <span className={`font-semibold tracking-tight ${isMobile ? 'text-left' : ''}`}>Gökberk Keskinkılıç</span>
+              <span className={`text-sm text-gray-600 ${isMobile ? 'text-left' : ''}`}>Software Engineer</span>
             </div>
           )}
-        </Link>
+        </div>
 
         {/* Navigation Links */}
-        <nav className={`flex flex-col gap-2 mt-4 ${!isCollapsed ? 'px-4' : 'px-2'}`}>
+        <nav className={`flex flex-col gap-1 mt-4 w-full px-4 ${isMobile ? 'py-2' : ''}`}>
           {LINKS.map((link) => (
             <NavigationLink
               key={link.href}
               href={link.href}
               label={!isCollapsed ? link.label : ''}
               icon={link.icon}
+              className={`px-2 py-2 hover:bg-gray-100 rounded-md ${isCollapsed && !isMobile ? 'justify-center' : ''}`}
             />
           ))}
         </nav>
 
         {/* Divider */}
-        {!isCollapsed && <hr className="my-4 w-full" />}
+        {!isMobile && <hr className="my-4 w-full px-4" />}
 
         {/* Online Profiles Section */}
-        <div className="flex flex-col items-center">
-          {!isCollapsed ? (
+        <div className={`flex flex-col w-full px-4 ${isMobile ? 'py-2' : ''}`}>
+          {!isMobile ? (
             <>
-              <span className="text-xs font-medium text-gray-600 uppercase px-4">
+              <span className="text-xs font-medium text-gray-600 uppercase">
                 Social Accounts
               </span>
-              <div className="flex flex-col gap-2 mt-2 px-4">
+              <div className="flex flex-col gap-1 mt-2 w-full">
                 {Object.values(PROFILES).map((profile) => (
                   <NavigationLink
                     key={profile.url}
                     href={profile.url}
-                    label={profile.title}
+                    label={!isCollapsed ? profile.title : ''}
                     icon={profile.icon}
+                    className={`px-2 py-2 hover:bg-gray-100 rounded-md ${isCollapsed && !isMobile ? 'justify-center' : ''}`}
                   />
                 ))}
               </div>
             </>
           ) : (
-            <div className="flex flex-col gap-2">
+            <div className="flex flex-col gap-1 mt-2 w-full">
               {Object.values(PROFILES).map((profile) => (
                 <NavigationLink
                   key={profile.url}
                   href={profile.url}
+                  label={profile.title}
                   icon={profile.icon}
+                  className="px-2 py-2 hover:bg-gray-100 rounded-md"
                 />
               ))}
             </div>
           )}
         </div>
-
-        {/* Toggle Button */}
-        {isMobile && (
-          <button
-            onClick={toggleMenu}
-            className="absolute top-4 right-[-1.5rem] bg-gray-100 p-2 rounded-r-md shadow-md border border-gray-200 text-gray-700 z-50"
-          >
-            {isCollapsed ? <FiMenu size={24} /> : <FiX size={24} />}
-          </button>
-        )}
+        <div className="pb-8"></div>
       </aside>
 
-      {/* Overlay for Mobile Menu */}
+      {/* Hamburger Menu (Header Button) - Only show on mobile */}
+      {isMobile && <HamburgerMenu isOpen={!isCollapsed} onClick={toggleMenu} />}
+
+      {/* Overlay for Mobile Menu - Only show on mobile */}
       {isMobile && !isCollapsed && (
         <div
           onClick={toggleMenu}
-          className="fixed inset-0 bg-black bg-opacity-50 z-30"
+          className="fixed inset-0 bg-black bg-opacity-30 z-30"
         />
       )}
     </>

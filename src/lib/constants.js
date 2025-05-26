@@ -18,6 +18,11 @@ export const LINKS = [
       icon: <SparklesIcon size={24} />
     },
     {
+      href: '/projects',
+      label: 'Projects',
+      icon: <NavigationIcon size={24} />
+    },
+    {
       href: '/writing',
       label: 'Writing',
       icon: <PencilLineIcon size={24} />
