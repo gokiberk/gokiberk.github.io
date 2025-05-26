@@ -59,8 +59,8 @@ export default function Page() {
           {/* Work Experience Summary */}
           <div className="mb-8 text-gray-700">
             <p>
-              Previously I have worked as a Full Stack Developer at Tor.app, interned at Data Science Intern, STM.
-              Software Test Engineering Intern, Aselsan. Technical Product Intern, Peaka.
+              Previously I have worked as a Full Stack Developer at Tor.app, interned at STM as Data Science Intern,
+              Aselsan as Software Test Engineering Intern and at Peaka as Technical Product Intern.
             </p>
             <p className="mb-8 text-gray-700">
               I enjoy travelling and taking pictures 🏕️ 🛤️ 📸
