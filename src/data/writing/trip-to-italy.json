@@ -1,0 +1,10 @@
+{
+  "slug": "trip-to-italy",
+  "title": "A Trip to Italy",
+  "date": "February 2, 2022",
+  "featuredImage": "/gallery/placeholder.avif",
+  "content": [
+    { "type": "h2", "text": "Exploring Italy" },
+    { "type": "p", "text": "Placeholder content for the trip to Italy article." }
+  ]
+}

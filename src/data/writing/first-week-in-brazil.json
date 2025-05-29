@@ -1,0 +1,10 @@
+{
+  "slug": "first-week-in-brazil",
+  "title": "First week in Brazil...",
+  "date": "April 15, 2024",
+  "featuredImage": "/gallery/placeholder.avif",
+  "content": [
+    { "type": "h2", "text": "Arrival and First Impressions" },
+    { "type": "p", "text": "Placeholder content for the Brazil article." }
+  ]
+} 

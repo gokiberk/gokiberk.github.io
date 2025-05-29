@@ -47,8 +47,10 @@ export default function Page() {
       />
 
       {/* Main Content */}
-      <main className="flex-1 overflow-y-auto pt-16 md:pt-0 lg:ml-16 transition-all duration-300">
-        <div className="p-4 md:p-8 lg:p-10at 13 max-w-7xl mx-auto">
+      <main className={`flex-1 overflow-y-auto pt-16 md:pt-0 transition-all duration-300 ${
+        !isMobile ? (isSidebarCollapsed ? 'lg:ml-16' : 'lg:ml-64') : ''
+      }`}>
+        <div className="p-4 md:p-8 lg:p-12 max-w-[1000px] mx-auto">
           {/* Introductory Bio Text */}
           <div className="mb-6">
             <p className="mb-8 text-gray-700">

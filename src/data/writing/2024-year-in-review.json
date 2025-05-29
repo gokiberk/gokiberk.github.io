@@ -1,0 +1,10 @@
+{
+  "slug": "2024-year-in-review",
+  "title": "2024 - Year in Review",
+  "date": "January 01, 2025",
+  "featuredImage": "/gallery/placeholder.avif",
+  "content": [
+      { "type": "h2", "text": "Looking Back at 2025" },
+      { "type": "p", "text": "Placeholder content for the year in review article." }
+  ]
+} 
