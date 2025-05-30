@@ -10,9 +10,10 @@ import WritingEntryClient from '@/components/WritingEntryClient'; // Import the 
 export default async function WritingEntryPage({ params }) {
   // In a Server Component, params is directly available (or will be a Promise handled by React.use implicitly by Next.js)
   const { slug } = params; // Access the slug directly from params
+  const lang = 'en'; // Default to English
 
   // Fetch the specific entry data on the server
-  const entry = getWritingEntryBySlug(slug);
+  const entry = getWritingEntryBySlug(slug, lang);
 
   // Fetch the list of all entries metadata for the sidebar on the server
   const allEntriesMetadata = getAllWritingEntriesMetadata();
@@ -28,6 +29,7 @@ export default async function WritingEntryPage({ params }) {
     <WritingEntryClient
       entry={entry}
       allEntriesMetadata={allEntriesMetadata}
+      lang={lang}
     />
   );
 } 
