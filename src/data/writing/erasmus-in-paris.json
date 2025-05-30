@@ -1,12 +1,226 @@
 {
   "slug": "erasmus-in-paris",
+  "contentId": "erasmus-in-paris",
   "title": "Erasmus in Paris",
-  "dateMod": "2022-01-22T00:00:00+00:00",
-  "datePub": "2022-01-22T00:00:00+00:00",
-  "date": "January 21, 2022",
+  "metaTitle": "My Erasmus Semester in Paris: 6 Months of Student Life, Culture & Adventures",
+  "metaDescription": "Follow my unforgettable Erasmus journey in Paris from January to June 2022. From couch surfing to finding lifelong friends, exploring French culture, weekend trips across Europe, and discovering the magic of student life in the City of Light.",
+  "primaryKeyword": "erasmus paris",
+  "secondaryKeywords": ["study abroad paris", "erasmus experience", "student life paris", "paris semester abroad", "erasmus stories", "study in france", "international student paris"],
+  "dateMod": "2022-01-21T00:00:00+00:00",
+  "datePub": "2022-01-21T00:00:00+00:00",
+  "dateISO": "2022-06-20",
+  "date": "June 20, 2022",
+  "language": "en",
   "featuredImage": "/gallery/placeholder.avif",
   "content": [
-    { "type": "h2", "text": "Arrival and First Impressions" },
-    { "type": "p", "text": "Placeholder content for the Brazil article." }
+    {
+      "type": "h1",
+      "text": "My Erasmus Adventure in Paris: Six Months That Changed Everything"
+    },
+    {
+      "type": "p",
+      "text": "They say Paris changes you, but nothing could have prepared me for the transformative six months I spent as an Erasmus student in the City of Light. From sleeping on couches to making lifelong friendships, from museum hopping to spontaneous European adventures, my Erasmus semester was everything I hoped for and so much more. Here's the complete story of how Paris became my second home."
+    },
+    
+    {
+      "type": "h2",
+      "text": "January: Arrival and Finding My Tribe"
+    },
+    {
+      "type": "h3",
+      "text": "January 23rd & 25th: Meeting My Erasmus Family"
+    },
+    {
+      "type": "p",
+      "text": "The magic of Erasmus began almost immediately when I met the people who would become my closest friends: Konstantinos, Yannic, Thanos, Ale, Jimena, and Carmen. There's something special about the bonds you form during Erasmus - you're all strangers in a new city, equally excited and nervous, ready to embrace every adventure together. [Expand on how you met each friend, first impressions of Paris, and the initial excitement of starting your exchange program.]"
+    },
+    
+    {
+      "type": "h2",
+      "text": "February: Settling In and First Adventures"
+    },
+    {
+      "type": "h3",
+      "text": "February 1st: From Couch Surfing to My Own Place"
+    },
+    {
+      "type": "p",
+      "text": "After ten days of sleeping on Alice's couch (bless her hospitality!), I finally moved into my own place. There's nothing quite like that feeling of independence when you get your first proper accommodation in a foreign city. Suddenly, Paris wasn't just a place I was visiting - it was becoming home. [Describe the search for accommodation, what your new place was like, and how it felt to finally have your own space in Paris.]"
+    },
+    {
+      "type": "h3",
+      "text": "February 21st: Weekend Escape to Italy"
+    },
+    {
+      "type": "p",
+      "text": "One of the best parts about studying in Europe is how easy it becomes to visit friends across the continent. My trip to Italy to see Lorenzo was my first taste of how Erasmus opens doors to adventures you never imagined. [Share details about the spontaneous trip, reuniting with Lorenzo, and how European travel became part of your regular routine.]"
+    },
+    
+    {
+      "type": "h2",
+      "text": "March: Diving into Parisian Culture"
+    },
+    {
+      "type": "h3",
+      "text": "March 19th: Art and Friendship at Centre Pompidou"
+    },
+    {
+      "type": "p",
+      "text": "Exploring the Centre Pompidou with Sulo marked the beginning of my deep dive into Paris's incredible art scene. The building itself is as much a work of art as the collections inside, and sharing it with a friend made the experience even more memorable. [Describe the Pompidou experience, what exhibitions you saw, and how art became part of your Parisian lifestyle.]"
+    },
+    
+    {
+      "type": "h2",
+      "text": "April: Birthdays, Ramen, and Belgian Adventures"
+    },
+    {
+      "type": "h3",
+      "text": "April 2nd: Discovering Paris's Food Scene"
+    },
+    {
+      "type": "p",
+      "text": "My fancy ramen experience opened my eyes to how Paris has embraced global cuisine while maintaining its culinary identity. Sometimes the best cultural immersion happens over a perfectly crafted bowl of noodles. [Detail the ramen restaurant, the quality of food, and how it compared to your expectations of Parisian dining.]"
+    },
+    {
+      "type": "h3",
+      "text": "April 16th: Birthday Celebrations in the City of Light"
+    },
+    {
+      "type": "p",
+      "text": "Celebrating my birthday in Paris was surreal - surrounded by friends from different countries, in one of the world's most beautiful cities. There's something magical about marking personal milestones while living your dream abroad. [Share how you celebrated, who was there, and what made this birthday special compared to previous ones.]"
+    },
+    {
+      "type": "h3",
+      "text": "April 17th-21st: Belgian Getaway"
+    },
+    {
+      "type": "p",
+      "text": "My five-day trip to Belgium showed me how diverse and accessible Europe becomes when you're studying abroad. From Brussels to Bruges, each city offered its own character and charm. [Describe the Belgian adventure, cities visited, local food experiences, and travel companions.]"
+    },
+    {
+      "type": "h3",
+      "text": "April 28th: Royal Splendor at Versailles"
+    },
+    {
+      "type": "p",
+      "text": "No Erasmus experience in Paris is complete without visiting Versailles. The opulence and history of the palace provide the perfect contrast to everyday student life in the city. [Share your impressions of Versailles, favorite parts of the palace and gardens, and how it felt to walk through such historic halls.]"
+    },
+    
+    {
+      "type": "h2",
+      "text": "May: Love, Travel, and Parisian Nights"
+    },
+    {
+      "type": "h3",
+      "text": "May 1st: When Love Comes to Paris"
+    },
+    {
+      "type": "p",
+      "text": "Having my girlfriend visit Paris added a romantic dimension to my Erasmus experience. Showing someone you love around your temporary home city creates memories that last forever. [Describe showing Paris through the eyes of someone special, favorite spots you visited together, and how it felt to play tour guide in your adopted city.]"
+    },
+    {
+      "type": "h3",
+      "text": "May 10th-11th: French Coast and Spanish Flavors"
+    },
+    {
+      "type": "p",
+      "text": "From Bordeaux and Arcachon on May 10th to San Sebastian on May 11th, this weekend showed me how Erasmus life means constant discovery. The French Atlantic coast's elegance followed by Basque culture in Spain - two completely different worlds in 48 hours. [Detail both destinations, the contrast between French and Spanish coastal cultures, and travel logistics.]"
+    },
+    {
+      "type": "h3",
+      "text": "May 14th: Family Visit - Bridging Two Worlds"
+    },
+    {
+      "type": "p",
+      "text": "When family comes to visit during Erasmus, you realize how much you've grown and changed. Sharing your new world with the people who raised you creates a beautiful bridge between home and your adventure. [Share the family visit experience, what you showed them, and how they reacted to your new Parisian life.]"
+    },
+    {
+      "type": "h3",
+      "text": "May 21st-28th: The Heart of Erasmus Social Life"
+    },
+    {
+      "type": "p",
+      "text": "This week perfectly captured the essence of Erasmus social life: Konstantinos's name day celebration on the 21st, Catan board game night on the 24th, art appreciation with Asmaa at Pompidou on the 25th, indie cinema in the Latin Quarter watching Donnie Darko on the 26th, Chinese food adventures with Erdem on the 27th, and watching the Champions League final with Yannic on the 28th. [Expand on each social activity and how they contributed to your sense of community.]"
+    },
+    
+    {
+      "type": "h2",
+      "text": "June: Final Adventures and Farewell"
+    },
+    {
+      "type": "h3",
+      "text": "June 1st: French Riviera Road Trip"
+    },
+    {
+      "type": "p",
+      "text": "Marseille, Nice, Cannes, and Monaco in one epic day trip - because when you're doing Erasmus, you squeeze every possible adventure into your remaining time. The French Riviera showed me yet another face of France, glamorous and sun-soaked. [Describe the whirlwind tour, highlights from each city, and the contrast with Paris life.]"
+    },
+    {
+      "type": "h3",
+      "text": "June 5th: Tennis at Roland Garros"
+    },
+    {
+      "type": "p",
+      "text": "Attending Roland Garros during the French Open was the perfect intersection of sport, culture, and once-in-a-lifetime experiences that define Erasmus. [Share the tennis experience, atmosphere at Roland Garros, and what matches you watched.]"
+    },
+    {
+      "type": "h3",
+      "text": "June 8th: Art, Football, and Friendship"
+    },
+    {
+      "type": "p",
+      "text": "A perfect Parisian day: morning at Musée d'Orsay, afternoon at Orangerie, evening playing football with the boys. This combination of high culture and casual fun epitomized my Erasmus balance. [Describe the art museums, what impressed you most, and the social aspect of sports with international friends.]"
+    },
+    {
+      "type": "h3",
+      "text": "June 9th-10th: Northern Adventures"
+    },
+    {
+      "type": "p",
+      "text": "Lille on June 9th followed by Amsterdam on June 10th with the whole crew - Emir, Bedo, Flavio, Simeone, Arda, Argo, Kickz, and Canberk. These final trips with friends felt bittersweet, knowing our time together was ending. [Detail both city experiences and the group dynamics during these final adventures.]"
+    },
+    {
+      "type": "h3",
+      "text": "June 14th-18th: The Perfect Parisian Finale"
+    },
+    {
+      "type": "p",
+      "text": "My last week in Paris was everything I could have hoped for: capturing the Eiffel Tower at moonrise on the 14th, Michelin-starred ramen with Erdem on the 15th, shopping at Madeleine and Place Vendôme with Lea on the 16th, and finally using that Opera Garnier ticket Alice gave me on my very first day on the 17th. The Lyon trip with Erdem, Victor, Tomas, and Marta on the 18th was the perfect last adventure. [Expand on each final experience and how they provided closure to your Erasmus journey.]"
+    },
+    {
+      "type": "h3",
+      "text": "June 19th: Au Revoir, Paris"
+    },
+    {
+      "type": "p",
+      "text": "Going back home after six months in Paris felt like leaving a part of myself behind. The person who arrived nervous and excited in January was completely different from the one leaving with a heart full of memories and friendships that would last forever. [Reflect on the departure, what you learned about yourself, and how Paris changed you.]"
+    },
+    
+    {
+      "type": "h2",
+      "text": "Lessons from My Erasmus Experience"
+    },
+    {
+      "type": "p",
+      "text": "Six months in Paris taught me more than any classroom ever could. From practical skills like navigating a foreign bureaucracy to life lessons about independence, friendship, and embracing the unknown, my Erasmus experience shaped who I am today. [Share key life lessons, personal growth insights, and advice for future Erasmus students.]"
+    },
+    
+    {
+      "type": "h2",
+      "text": "Tips for Future Erasmus Students in Paris"
+    },
+    {
+      "type": "p",
+      "text": "For anyone considering an Erasmus semester in Paris, here's what I wish I'd known before arriving: [Include practical advice about accommodation, budgeting, making friends, academic integration, cultural adaptation, and making the most of the European travel opportunities.]"
+    },
+    
+    {
+      "type": "h2",
+      "text": "Why Erasmus in Paris Changed My Life"
+    },
+    {
+      "type": "p",
+      "text": "Paris wasn't just a city where I studied for six months - it became the place where I discovered who I could be when pushed outside my comfort zone. The friendships, adventures, cultural immersion, and personal growth made this the most transformative period of my life. To anyone considering Erasmus: don't hesitate. Your adventure is waiting. [Conclude with lasting impact, current relationships with Erasmus friends, and encouragement for prospective students.]"
+    }
   ]
-} 
+}

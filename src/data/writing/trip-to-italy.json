@@ -1,7 +1,7 @@
 {
   "slug": "trip-to-italy",
   "title": "A Trip to Italy",
-  "contentId": "video-to-text",
+  "contentId": "trip-to-italy",
   "metaTitle": "Two Weeks in Italy: Complete Travel Guide from Pisa to Rome, Tuscany & Cinque Terre",
   "metaDescription": "Discover my authentic two-week Italy adventure with a local friend. From Rome's historic sites to Tuscany's hidden gems, Cinque Terre's coastal beauty, and Bologna's vibrant nightlife. Budget travel tips included.",
   "primaryKeyword": "italy blog",
@@ -12,6 +12,7 @@
   "language": "en",
   "dateMod": "2024-05-30T00:00:00+00:00",
   "datePub": "2025-05-30T00:00:00+00:00",
+  "dateISO": "2022-02-21",
   "date": "February 21, 2022",
   "featuredImage": "/gallery/placeholder.avif",
   "content": [

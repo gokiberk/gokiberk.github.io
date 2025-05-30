@@ -4,6 +4,7 @@
 
 import { getWritingEntryBySlug, getAllWritingEntriesMetadata } from '@/lib/writing'; // Import server-side data fetching
 import WritingEntryClient from '@/components/WritingEntryClient'; // Import the client component
+import allUrls from '@/data/allUrls.json';
 
 // This is now a Server Component
 // Async function is needed to await data fetching
@@ -11,6 +12,10 @@ export default async function WritingEntryPage({ params }) {
   // In a Server Component, params is directly available (or will be a Promise handled by React.use implicitly by Next.js)
   const { slug } = params; // Access the slug directly from params
   const lang = 'en'; // Default to English
+
+  // Find the contentId for the current English slug
+  // In allUrls, the key is the English slug/contentId
+  const contentId = Object.keys(allUrls).find(key => key === slug);
 
   // Fetch the specific entry data on the server
   const entry = getWritingEntryBySlug(slug, lang);
@@ -30,6 +35,8 @@ export default async function WritingEntryPage({ params }) {
       entry={entry}
       allEntriesMetadata={allEntriesMetadata}
       lang={lang}
+      contentId={contentId}
+      allUrls={allUrls}
     />
   );
 } 

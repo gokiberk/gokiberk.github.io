@@ -3,6 +3,7 @@ import path from 'path';
 
 const dataDirectory = path.join(process.cwd(), 'src', 'data', 'writing');
 const trDataDirectory = path.join(dataDirectory, 'tr');
+const contentMapPath = path.join(process.cwd(), 'src', 'data', 'content-map.json');
 
 // Helper function to read and parse JSON file
 function readJsonFile(filePath) {
@@ -15,64 +16,71 @@ function readJsonFile(filePath) {
   }
 }
 
-// Helper function to get contentId from JSON file
-function getContentId(filePath) {
-  const data = readJsonFile(filePath);
-  return data?.contentId;
-}
+// Read content mapping
+const contentMap = fs.existsSync(contentMapPath) ? readJsonFile(contentMapPath) : { enToTr: {}, trToEn: {} };
 
 export function getAllWritingEntriesMetadata() {
   const fileNames = fs.readdirSync(dataDirectory).filter(file => file.endsWith('.json'));
-  const trFileNames = fs.existsSync(trDataDirectory) ? fs.readdirSync(trDataDirectory) : [];
+  const trFileNames = fs.existsSync(trDataDirectory) ? fs.readdirSync(trDataDirectory).filter(file => file.endsWith('.json')) : [];
 
-  // First, create a map of contentId to Turkish slug
-  const trContentMap = {};
-  trFileNames.forEach(fileName => {
-    const fullPath = path.join(trDataDirectory, fileName);
-    const contentId = getContentId(fullPath);
-    if (contentId) {
-      trContentMap[contentId] = fileName.replace('.json', '');
-    }
-  });
-
-  const allEntriesMetadata = fileNames.map(fileName => {
-    // Remove ".json" from file name to get slug
+  // English entries
+  const enEntries = fileNames.map(fileName => {
     const slug = fileName.replace(/\.json$/, '');
-
-    // Read full json file
     const fullPath = path.join(dataDirectory, fileName);
     const jsonData = readJsonFile(fullPath);
     if (!jsonData) return null;
-
-    // Check if there's a Turkish translation by matching contentId
-    const hasTranslation = jsonData.contentId && trContentMap[jsonData.contentId];
-    const trSlug = hasTranslation ? trContentMap[jsonData.contentId] : null;
-
-    // Return metadata needed for the list
+    const hasTranslation = contentMap.enToTr[slug] !== undefined;
+    const trSlug = hasTranslation ? contentMap.enToTr[slug] : null;
     return {
       slug,
       title: jsonData.title,
       date: jsonData.date,
+      dateISO: jsonData.dateISO,
       hasTranslation,
       trSlug,
+      language: 'en',
     };
-  }).filter(Boolean); // Remove any null entries
+  }).filter(Boolean);
 
-  return allEntriesMetadata;
+  // Turkish entries
+  const trEntries = trFileNames.map(fileName => {
+    const slug = fileName.replace(/\.json$/, '');
+    const fullPath = path.join(trDataDirectory, fileName);
+    const jsonData = readJsonFile(fullPath);
+    if (!jsonData) return null;
+    return {
+      slug,
+      title: jsonData.title,
+      date: jsonData.date,
+      dateISO: jsonData.dateISO,
+      hasTranslation: false, // Optionally update if you want to check for EN translation
+      trSlug: null,
+      language: 'tr',
+    };
+  }).filter(Boolean);
+
+  return [...enEntries, ...trEntries];
 }
 
 export function getWritingEntryBySlug(slug, lang = 'en') {
   // Handle Turkish translations
   if (lang === 'tr') {
+    // Try to read the Turkish file directly
     const fullPath = path.join(trDataDirectory, `${slug}.json`);
     const jsonData = readJsonFile(fullPath);
-    if (!jsonData) return null;
+    if (!jsonData) {
+      console.error(`Turkish content not found for slug ${slug}`);
+      return null;
+    }
     return jsonData;
   }
 
   // Handle English content
   const fullPath = path.join(dataDirectory, `${slug}.json`);
   const jsonData = readJsonFile(fullPath);
-  if (!jsonData) return null;
+  if (!jsonData) {
+    console.error(`English content not found for slug ${slug}`);
+    return null;
+  }
   return jsonData;
 } 
