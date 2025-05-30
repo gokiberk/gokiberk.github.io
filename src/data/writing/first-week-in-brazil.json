@@ -1,15 +1,21 @@
 {
-  "slug": "first-week-in-brazil",
-  "contentId": "first-week-in-brazil",
-  "title": "First week in Brazil...",
-  "dateMod": "2024-05-30T00:00:00+00:00",
-  "datePub": "2025-05-30T00:00:00+00:00",
-  "dateISO": "2018-08-10",
-  "date": "August 10, 2018",
-  "language": "en",
-  "featuredImage": "/gallery/placeholder.avif",
-  "content": [
-    { "type": "h2", "text": "Arrival and First Impressions" },
-    { "type": "p", "text": "Placeholder content for the Brazil article." }
-  ]
-} 
+    "slug": "first-week-in-brazil",
+    "contentId": "first-week-in-brazil",
+    "title": "First week in Brazil...",
+    "dateMod": "2024-05-30T00:00:00+00:00",
+    "datePub": "2025-05-30T00:00:00+00:00",
+    "dateISO": "2018-08-10",
+    "date": "August 10, 2018",
+    "language": "en",
+    "featuredImage": "/gallery/placeholder.avif",
+    "content": [
+        {
+            "type": "h2",
+            "text": "Arrival and First Impressions"
+        },
+        {
+            "type": "p",
+            "text": "Coming soon..."
+        }
+    ]
+}
