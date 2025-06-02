@@ -7,19 +7,16 @@ import projects from '@/data/projects/index.json';
 import Link from 'next/link';
 
 export default function Projects() {
-  const [isMobile, setIsMobile] = useState(window.innerWidth < 1300);
+  const [isMobile, setIsMobile] = useState(false);
   const [isSidebarCollapsed, setIsSidebarCollapsed] = useState(false);
 
-  const handleResize = () => {
-    const mobile = window.innerWidth < 1300;
-    setIsMobile(mobile);
-    // SideMenu component handles its own collapse based on screen size
-  };
-
   useEffect(() => {
-    handleResize(); // Check initial size
-    window.addEventListener('resize', handleResize); // Listen for resize events
-    return () => window.removeEventListener('resize', handleResize); // Cleanup
+    const handleResize = () => {
+      setIsMobile(window.innerWidth < 1300);
+    };
+    handleResize(); // Set initial value
+    window.addEventListener('resize', handleResize);
+    return () => window.removeEventListener('resize', handleResize);
   }, []);
 
   const toggleMenu = () => setIsSidebarCollapsed(!isSidebarCollapsed);
