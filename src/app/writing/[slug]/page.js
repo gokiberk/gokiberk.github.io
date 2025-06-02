@@ -54,7 +54,7 @@ export default async function WritingEntryPage({ params }) {
         featuredImage={entry.featuredImage} // Assuming featuredImage is in entry data
         imageAlt={entry.title} // Use title as image alt if no specific alt is available
         baseUrl="https://gokiberk.com" // Replace with your base URL
-        twitterHandle="@yourtwitter" // Replace with your twitter handle
+        twitterHandle="@gokiberk" // Replace with your twitter handle
         authorName="Gokiberk" // Replace with your author name
         authorUrl="https://gokiberk.com" // Replace with your author URL
         authorImage="/img/author.jpg" // Replace with your author image path

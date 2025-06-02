@@ -37,6 +37,7 @@ export default function Page() {
         />
         <meta property="og:title" content="Gökberk Keskinkılıç" />
         <meta property="og:image" content="/img/og-gokiberk.webp" />
+        <link rel="canonical" href="https://gokiberk.com/" />
       </Head>    
     <div className="flex flex-col min-h-screen">
       {/* Sidebar with collapsible functionality */}
