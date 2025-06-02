@@ -31,7 +31,7 @@ export default async function WritingPage() {
       {/* Wrapper for Article Navigation and Main Content */}
       <div className="flex flex-1 flex-col md:flex-row md:ml-64">
         {/* Article Navigation (Desktop Only) */}
-        <aside className="w-72 flex-shrink-0 border-r border-gray-200 overflow-y-auto pt-16 hidden md:block">
+        <aside className="w-72 flex-shrink-0 border-r border-gray-200 overflow-y-auto pt-16 hidden lg:block">
           <div className="p-4">
             <h3 className="text-lg font-semibold mb-4">Writing Entries</h3>
             <ul>

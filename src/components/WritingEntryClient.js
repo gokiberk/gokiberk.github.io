@@ -34,7 +34,7 @@ export default function WritingEntryClient({ entry, allEntriesMetadata, lang, co
       {/* Wrapper for Article Navigation and Main Content */}
       <div className="flex flex-1 flex-col md:flex-row md:ml-64">
         {/* Article Navigation (Desktop Only) */}
-        <aside className="w-72 flex-shrink-0 border-r border-gray-200 overflow-y-auto pt-16 hidden md:block sticky top-0 h-screen hover:overflow-y-auto" style={{ pointerEvents: 'auto' }}>
+        <aside className="w-72 flex-shrink-0 border-r border-gray-200 overflow-y-auto pt-16 hidden lg:block sticky top-0 h-screen hover:overflow-y-auto" style={{ pointerEvents: 'auto' }}>
           <div className="p-4">
             <h3 className="text-lg font-semibold mb-4">{isTurkish ? 'Yazılar' : 'Writing Entries'}</h3>
             <ul>
@@ -71,7 +71,7 @@ export default function WritingEntryClient({ entry, allEntriesMetadata, lang, co
             </div>
 
             {/* Article Navigation Links */}
-            <div className="flex flex-col sm:flex-row justify-between items-center mb-8 text-sm font-medium" style={{ pointerEvents: 'auto' }}>
+            <div className="flex flex-row md:flex-row lg:flex-row justify-between items-center mb-8 text-sm font-medium" style={{ pointerEvents: 'auto' }}>
                 {previousEntry ? (
                     <Link 
                         href={previousEntry.language === 'en' ? `/writing/${previousEntry.slug}` : `/writing/${previousEntry.language}/${previousEntry.slug}`} 
@@ -82,12 +82,12 @@ export default function WritingEntryClient({ entry, allEntriesMetadata, lang, co
                 ) : (
                     <span className="text-gray-400 mb-2 sm:mb-0"></span>
                 )}
-                <Link 
+                {/* <Link 
                     href={isTurkish ? '/writing/tr' : '/writing'}
                     className="text-gray-600 hover:text-gray-900 underline mb-2 sm:mb-0 md:hidden"
                 >
                     {isTurkish ? 'Tüm Yazılar' : 'All Writing'}
-                </Link>
+                </Link> */}
                 {nextEntry ? (
                     <Link 
                          href={nextEntry.language === 'en' ? `/writing/${nextEntry.slug}` : `/writing/${nextEntry.language}/${nextEntry.slug}`} 

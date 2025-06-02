@@ -1,0 +1,23 @@
+[
+  {
+    "id": "personal-website",
+    "title": "Personal Website",
+    "description": "My portfolio and blog built with Next.js, featuring writing, projects, and more.",
+    "url": "https://gokiberk.com",
+    "image": "/img/og-gokiberk.webp"
+  },
+  {
+    "id": "transkriptor",
+    "title": "Transkriptor Landing Page",
+    "description": "Landing pages and blogs built with Next.js.",
+    "url": "https://transkriptor.com",
+    "image": "https://transkriptor.com/img/homepageThumbnail.webp"
+  },
+  {
+    "id": "socoolbus",
+    "title": "SoCoolBus Landing Page",
+    "description": "Senior project website, featuring reports, and team member information.",
+    "url": "https://socoolbus.github.io/",
+    "image": "/img/socoolbus.avif"
+  }
+] 

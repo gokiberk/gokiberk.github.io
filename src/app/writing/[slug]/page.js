@@ -31,6 +31,7 @@ export default async function WritingEntryPage({ params }) {
   }
 
   // Assuming excerpt, dateISO, and featuredImage are part of entry data
+  const title = entry.title;
   const metaDescription = entry.metaDescription;
   const metaTitle = entry.metaTitle;
   const datePublished = entry.dateISO;
@@ -40,7 +41,7 @@ export default async function WritingEntryPage({ params }) {
   return (
     <>
       <BlogHeadComponent
-        title={entry.title}
+        title={title}
         metaDescription={metaDescription}
         metaTitle={metaTitle}
         slug={slug}

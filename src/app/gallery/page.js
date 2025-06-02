@@ -6,7 +6,7 @@ import Img from 'next/image';
 import { useState, useEffect } from 'react';
 
 export default function Gallery() {
-  const [isMobile, setIsMobile] = useState(false);
+  const [isMobile, setIsMobile] = useState(window.innerWidth < 1300);
   const [isSidebarCollapsed, setIsSidebarCollapsed] = useState(false);
 
   const handleResize = () => {
@@ -33,9 +33,7 @@ export default function Gallery() {
       />
 
       {/* Main Content */}
-      <main className={`flex-1 overflow-y-auto pt-16 md:pt-0 transition-all duration-300 ${
-         !isMobile ? (isSidebarCollapsed ? 'ml-16' : 'ml-64') : ''
-      }`}>
+      <main className="flex-1 overflow-y-auto pt-16 md:pt-0 transition-all duration-300 md:ml-64">
         <div className="p-4 md:p-8 lg:p-12 max-w-5xl mx-auto">
           <PageTitle title="Gallery" className="lg hidden" />
 
