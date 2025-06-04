@@ -26,6 +26,9 @@ export default function WritingEntryClient({ entry, allEntriesMetadata, lang, co
   const previousEntry = currentEntryIndex > 0 ? sortedLanguageEntries[currentEntryIndex - 1] : null;
   const nextEntry = currentEntryIndex < sortedLanguageEntries.length - 1 ? sortedLanguageEntries[currentEntryIndex + 1] : null;
 
+  // Find the first h1 block in the content
+  const mainH1Block = entry.content.find(block => block.type === 'h1');
+
   return (
     <div className="flex flex-col md:flex-row min-h-screen">
       {/* Sidebar */}
@@ -100,10 +103,19 @@ export default function WritingEntryClient({ entry, allEntriesMetadata, lang, co
                 )}
             </div>
 
-            <h1 className="text-4xl font-extrabold mb-2">{entry.title}</h1>
-            {entry.date && (
-              <div className="text-gray-500 text-base mb-8">{entry.date}</div>
+            {/* Render main h1 from content */}
+            {mainH1Block && (
+              <h1 className="text-4xl font-extrabold mb-2">{mainH1Block.text}</h1>
             )}
+            {(entry.author && entry.date) ? (
+              <div className="text-gray-500 text-base mb-2">
+                <span className="text-gray-500 text-base">{entry.author}</span> | {entry.date}
+              </div>
+            ) : entry.author ? (
+              <div className="text-gray-500 text-base mb-2">{entry.author}</div>
+            ) : entry.date ? (
+              <div className="text-gray-500 text-base mb-2">{entry.date}</div>
+            ) : null}
             {entry.featuredImage && (
               <img
                 src={entry.featuredImage}
@@ -114,10 +126,18 @@ export default function WritingEntryClient({ entry, allEntriesMetadata, lang, co
             <div className="prose prose-lg max-w-none">
               {entry.content.map((block, index) => (
                 <div key={index}>
-                  {block.type === 'h1' && <h1 className="text-3xl font-bold mb-6 mt-8">{block.text}</h1>}
+                  {/* Do not render h1 here */}
                   {block.type === 'h2' && <h2 className="text-2xl font-bold mb-4 mt-6">{block.text}</h2>}
                   {block.type === 'h3' && <h3 className="text-xl font-semibold mb-3 mt-5">{block.text}</h3>}
                   {block.type === 'p' && <p className="text-gray-700 leading-relaxed mb-6">{block.text}</p>}
+                  {block.type === 'inlineImage' && (
+                    <img
+                      src={block.filename}
+                      alt={block.altText || ''}
+                      className="inline-block align-middle rounded shadow"
+                      style={{ maxWidth: '100%' }}
+                    />
+                  )}
                 </div>
               ))}
             </div>

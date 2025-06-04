@@ -1,0 +1,161 @@
+{
+  "slug": "finike-gunlugu",
+  "contentId": "finike-diary",
+  "title": "Finike Günlüğü",
+  "metaTitle": "Finike Gezi Günlüğü: Portakal Bahçeleri Arasında Huzurlu Bir Kaçamak",
+  "metaDescription": "Finike'de geçirdiğimiz birkaç günün huzur dolu notları: portakal kokuları, Turkuazköy'de doğayla iç içe bir tatil, Neşeli Balık'ta unutulmaz bir akşam yemeği ve Kaş'a uzanan bir yolculuk.",
+  "primaryKeyword": "finike gezi rehberi",
+  "secondaryKeywords": [
+    "finike",
+    "antalya",
+    "turkuazköy",
+    "neşeli balık",
+    "kaş",
+    "kekova"
+  ],
+  "dateMod": "2025-06-04T16:41:00+03:00",
+  "datePub": "2025-06-04T16:41:00+03:00",
+  "dateISO": "2025-06-04",
+  "date": "4 Haziran 2025",
+  "language": "tr",
+  "featuredImage": "/writing/finike-gunlugu.avif",
+  "author": "Mehmet Ali Keskinkılıç",
+  "content": [
+    {
+      "type": "h1",
+      "text": "Finike Günlüğü: Portakal Kokulu Bir Kaçamak"
+    },
+    {
+      "type": "p",
+      "text": "Mayıs ayının son haftasında, iki arkadaşımla birlikte Finike'ye doğru yola çıktık. Bu benim için nostaljik bir seyahatti. Finike'yi ilk kez 1986 yılında görmüştüm. O dönem, Finike-Kumluca arasında oldukça geniş bir yol vardı ve bunun kriz anında uçakların da inebileceği bir alternatif pist olarak düşünüldüğünü duymuştum. O yoldan yine geçtim bu seyahatte, ama bu kez Finike'yi çok daha detaylı tanıma fırsatım oldu. Antalya'nın bu saklı cennetini keşfetmek için ideal bir dönemdi; turist yoğunluğu henüz başlamamış, hava da denize girmeye uygundu."
+    },
+    {
+      "type": "h2",
+      "text": "Turunç Diyarı Finike"
+    },
+    {
+      "type": "p",
+      "text": "Finike, yaklaşık 50 bin nüfusu olan, portakalıyla ün yapmış Antalya'nın güzel ve sakin bir ilçesi. Beydağları'nın ve Toroslar'ın eteklerinde uzanan Finike Ovası, narenciye bahçeleriyle kaplı. Ova boyunca portakal, limon, nar ağaçları arasında ilerlerken adeta doğanın kucağında bir yolculuk yapıyorsunuz. Finike turizm potansiyeli açısından henüz keşfedilmemiş bir hazine; Akdeniz ikliminin en güzel örneklerinden birini yaşayabileceğiniz, doğa turizminin yanı sıra kültür turizmi için de ideal bir destinasyon."
+    },
+    {
+      "type": "p",
+      "text": "Kent sosyolojisiyle ilgili bir radyo programında şöyle deniyordu: \"Yaşanabilir bir şehir, 50 bini aşmamalı.\" Finike işte böyle bir yer. Hastanesi, tüm temel hizmetleri, güzel ulaşım imkanları var. D400 karayolunun kıyısında ve belki de Türkiye'nin değil, dünyanın en güzel yol güzergâhlarından birine sahip. Akdeniz kıyı şeridi boyunca uzanan bu güzergah, her kilometre başı yeni bir manzara sunuyor. Likya Yolu'nun da geçtiği bu antik topraklar, tarih meraklıları için ayrı bir çekim merkezi."
+    },
+    {
+      "type": "inlineImage",
+      "imageId": "image1",
+      "filename": "/writing/finike-sahil.avif",
+      "altText": "Finike sahil ve kıyı şeridi manzarası",
+      "figCaption": "Finike'nin güzel sahil şeridi ve Akdeniz kıyısı.",
+      "lang": "tr"
+    },
+    {
+      "type": "h2",
+      "text": "Turkuazköy'de Doğa ve Sadelik"
+    },
+    {
+      "type": "p",
+      "text": "Turkuaz Köyü, 600 dönümlük bir narenciye bahçesinin içine kurulmuş bungalov evlerden oluşan bu köy, temizliği, düzeni ve doğaya uyumlu yapısıyla bizi etkiledi. İşletmecisi Celal Bey, bir ziraat mühendisi olarak burada tarımı, sporu ve turizmi birleştiren bir ekosistem kurma hayalinden bahsetti. Genç bir girişimci olarak bu vizyonunu hayata geçirme çabası gerçekten takdire şayan. Turkuazköy, ekoturizm ve sürdürülebilir tarım konusunda Türkiye'ye örnek olabilecek projelerden biri. Organik tarım uygulamaları ve doğa dostu konaklama seçenekleriyle, şehir stresinden uzaklaşmak isteyenler için mükemmel bir alternatif sunuyor."
+    },
+    {
+      "type": "inlineImage",  
+      "imageId": "image2",
+      "filename": "/writing/finike-turkuaz-koy.avif",
+      "altText": "Turkuazköy organik narenciye bahçesi ve doğal çevre",
+      "figCaption": "Ekoturizm örneği Turkuazköy'ün organik tarım alanları.",
+      "lang": "tr"
+    },
+    {
+      "type": "h2",
+      "text": "Neşeli Balık ve Yerel Esnafa Dair"
+    },
+    {
+      "type": "p",
+      "text": "Finike'deki \"Neşeli Balık\" adlı restoranda yediğimiz balık, belki de hayatımda yediğim en leziz balıktı. Fiyat-performans dengesi, ilgi ve kalite açısından mükemmeldi. Sadece bu restoran değil, ilçedeki diğer esnaflar da hâlâ o kadim Anadolu misafirperverliğini yaşatıyor. Finike lokantaları ve restoranları, taze deniz ürünleri ve yerel lezzetleriyle ünlü. Özellikle balık menüleri konusunda Antalya bölgesinin en kaliteli adreslerinden biri olarak öne çıkıyor."
+    },
+    {
+      "type": "p",
+      "text": "Bir börekçide, yaşlı ve engelli bir müşteriye garsonun \"Amca sen şöyle otur, ben senin böreğini getiririm\" diyerek yardımcı olması ya da bir şarküteride satıcının ürünlerin nereden geldiğini tek tek anlatması beni çok etkiledi. Ne kandırıldığını hissediyorsun, ne de yabancı biri gibi karşılanıyorsun. Gerçekten samimi, içten insanlar… Finike halkının bu samimi yaklaşımı, küçük ilçelerin en güzel özelliklerinden biri. Yerel ticaret erbabı, müşteri memnuniyetini ön planda tutuyor ve bu da ziyaretçiler için unutulmaz anılar yaratıyor."
+    },
+    {
+      "type": "p",
+      "text": "Yaylalarda bile çay ikramları, küçük jestler devam ediyor. Hatta bir esnaf, \"Siz meyve yiyorsunuz diye çayı şimdi sormadım, sonra sorayım, rahatsız etmeyeyim\" dedi. Bu incelikler şehir hayatında pek rastlanmayan türden… Finike yaylaları ve kırsal kesimi, doğa yürüyüşü ve trekking için de ideal rotalar sunuyor. Likya Yolu'nun bu kesimi, antik kalıntılarla bezeli parkurlarıyla tarih ve doğa severleri bir arada ağırlıyor."
+    },
+    {
+      "type": "inlineImage",
+      "imageId": "image3", 
+      "filename": "/writing/finike-balik.avif",
+      "altText": "Finike'de taze balık ve deniz ürünleri",
+      "figCaption": "Finike'nin ünlü taze balık lezzetleri ve Neşeli Balık restoranı.",
+      "lang": "tr"
+    },
+    {
+      "type": "h2",
+      "text": "Elmalı Helvası ve Küçük Mutluluklar"
+    },
+    {
+      "type": "p",
+      "text": "1935'ten beri Elmalı'da üretim yapan bir helvacıdan, \"Yusuf Onbaşı\" markalı bir helva aldım. O kadar beğendim ki teşekkür etmek için aradım. Nereden alabileceğimizi sordum. \"Biz kargoyla uğraşmıyoruz, yolunuz düşerse buyurun gelin,\" dedi. Bu yaklaşım beni çok etkiledi. \"Ben buradayım, bana bu topraklar yetiyor...\" demek… Bu kanaatkâr yaşam felsefesi, günümüzde neredeyse bir erdem haline geldi. Elmalı helva üretimi, bölgenin geleneksel el sanatlarından biri. Yerel üreticiler, nesiller boyu süren tarif ve teknikleriyle kaliteyi koruyorlar."
+    },
+    {
+      "type": "p",
+      "text": "Gandhi'nin o güzel sözünü hatırlattı bana: \"Önemli olan çok şeye sahip olmak değil, en az şeye ihtiyaç duymaktır.\""
+    },
+    {
+      "type": "h2",
+      "text": "Kekova, Kaleköy, Kaş..."
+    },
+    {
+      "type": "p",
+      "text": "Finike'den sonra Kekova, Kaleköy, Üçağız ve Kaş'a da uğradık. Kekova ve Kaleköy'e ilk kez gittim. Bu ülkenin çok yerini gezdim ama gerçekten bizim topraklarımız gibisi yok. Deniziyle, yeşiliyle, doğasıyla, insanıyla eşsiz bir coğrafya… Kekova Adası ve batık şehir kalıntıları, Likya medeniyetinin en önemli izlerini taşıyor. UNESCO Dünya Mirası geçici listesinde yer alan bu antik alan, tarih meraklıları için vazgeçilmez bir durak. Kaleköy'deki Simena Kalesi ise Akdeniz'in en güzel panoramik manzaralarından birini sunuyor."
+    },
+    {
+      "type": "p",
+      "text": "Kaş'ta bir cam sanatları dükkânına girdik. Norveçli bir sanatçının eserlerini satan beyefendiyle sohbet ettik. Eskiden İtalyan ve İngiliz turistlerin rağbet ettiğini, artık o kadar sık gelmediklerini, satışların da azaldığını söyledi. Ama yine de Kaş güzelliğinden hiçbir şey kaybetmemiş. Cam sanatına hayran kaldım. Ancak dağ yamaçlarına kadar yapılan büyük evler, doğaya biraz haksızlık gibi geldi. Kaş'ın butik otelleri ve sanat galerileri, uluslararası sanat severlerden büyük ilgi görüyor. Özellikle el sanatları ve özgün tasarım ürünleri konusunda Türkiye'nin önemli merkezlerinden biri."
+    },
+    {
+      "type": "inlineImage",
+      "imageId": "image4",
+      "filename": "/writing/finike-kalekoy.avif", 
+      "altText": "Kaleköy genel görünümü ve antik kalıntılar",
+      "figCaption": "Simena Antik Kenti, günümüz adıyla Kaleköy'ün büyüleyici manzarası.",
+      "lang": "tr"
+    },
+    {
+      "type": "h2",
+      "text": "Küçük Lüksler, Büyük Keyifler"
+    },
+    {
+      "type": "p",
+      "text": "Mayıs sonu olmasına rağmen denize girebildik. Hava yer yer yağışlıydı ama bu, keyfimizi azaltmadı. 10 liraya çay içmek hâlâ mümkün. Lokantalarda uygun fiyatlara leziz yemekler yiyebiliyorsunuz. Trafik yok, park sorunu yok. İçiniz rahat, kafanız huzurlu. Finike sahilleri, kalabalık turistik merkezlere kıyasla çok daha sakin ve temiz. Plajları genellikle çakıllı olmakla birlikte, denizin berraklığı ve temizliği dikkat çekici. Özellikle erken sezon dönemlerinde, plajlar adeta özel bir koy havasında."
+    },
+    {
+      "type": "p",
+      "text": "Finike'nin köylerine uğradık, insanlarla sohbet ettik. Büyükşehirlerden çok farklı; daha içten, daha sahici… Finike kırsal turizmi açısından da büyük potansiyele sahip. Köy yaşamını deneyimlemek, geleneksel tarım faaliyetlerini görmek ve yerel halkla sohbet etmek isteyenler için ideal fırsatlar sunuyor. Agro-turizm kapsamında değerlendirilebilecek birçok çiftlik ve narenciye bahçesi mevcut."
+    },
+    {
+      "type": "inlineImage",
+      "imageId": "image5",
+      "filename": "/writing/finike-deniz.avif",
+      "altText": "Finike denizi ve berrak su manzarası", 
+      "figCaption": "Finike'nin pırıl pırıl denizi ve yüzme keyfi.",
+      "lang": "tr"
+    },
+    {
+      "type": "h2",
+      "text": "Son Söz"
+    },
+    {
+      "type": "p",
+      "text": "Finike… Ankara'ya 700 km uzaklıkta ama doğasıyla, portakalıyla, limonuyla, insanıyla sıcacık bir ilçe. Gidin; Turkuazköy'ü gezin, yaylalarına çıkın, Neşeli Balık'ta balık yiyin, serpme börek tadın, Elmalı'nın helvasını, leblebisini alın. Ülkemizin bu güzel köşelerini görün ve anlatın. Sevgiyle kalın. Finike gezi rehberi olarak bu deneyimlerimi paylaştım; umarım sizler de bu güzel toprakları keşfetme fırsatı bulursunuz. Antalya'nın bu saklı cennetinde geçireceğiniz birkaç gün, şehir hayatının stresinden uzaklaşmanız için yeterli olacaktır."
+    },
+    {
+      "type": "inlineImage",
+      "imageId": "image6",
+      "filename": "/writing/finike-manzara.avif",
+      "altText": "Finike genel manzarası ve doğal güzellikler",
+      "figCaption": "Finike'nin doğal güzellikleri ve panoramik manzarası.",
+      "lang": "tr"
+    }
+  ]
+}

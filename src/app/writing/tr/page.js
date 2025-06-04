@@ -71,8 +71,8 @@ export default async function WritingPageTR() {
             </div>
             <h1 className="text-4xl font-extrabold mb-8">Yazılar</h1>
             <p className="text-gray-700 leading-relaxed mb-6">
-              Yazı bölümüme hoş geldiniz. Burada teknoloji, kişisel deneyimler ve üzerinde çalıştığım çeşitli projeler hakkında makaleler bulabilirsiniz.
-              Kenar çubuğunda listelenen yazıları keşfetmekten çekinmeyin.
+              Yazı bölümüme hoş geldiniz. Burada seyahatler, kişisel deneyimler ve üzerinde çalıştığım çeşitli projeler hakkında makaleler bulabilirsiniz.
+              Aşağıda listelenen yazıları keşfetmekten çekinmeyin.
             </p>
             <div className="grid gap-6 md:grid-cols-2">
               {validEntries.map((entry) => (
