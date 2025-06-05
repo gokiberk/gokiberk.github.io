@@ -5,7 +5,46 @@
 import { getWritingEntryBySlug, getAllWritingEntriesMetadata } from '@/lib/writing'; // Import server-side data fetching
 import WritingEntryClient from '@/components/WritingEntryClient'; // Import the client component
 import allUrls from '@/data/allUrls.json';
-import BlogHeadComponent from '@/components/BlogHeadComponent'; // Import BlogHeadComponent
+import { generateMetadata as generateBlogMetadata } from '@/components/BlogHeadComponent';
+
+export async function generateMetadata({ params }) {
+  const { slug } = params;
+  const lang = 'en';
+  const contentId = Object.keys(allUrls).find(key => key === slug);
+
+  const entry = getWritingEntryBySlug(slug, lang);
+
+  if (!entry) {
+    return {
+      title: 'Entry Not Found',
+      description: 'The requested entry could not be found.'
+    };
+  }
+
+  const metaDescription = entry.metaDescription || entry.excerpt || (entry.content && entry.content[0]?.text) || 'Read this interesting article on my blog.';
+  const datePublished = entry.dateISO;
+  const dateModified = entry.dateISO;
+
+  return generateBlogMetadata({
+    title: entry.title,
+    metaDescription,
+    metaTitle: entry.metaTitle,
+    slug,
+    language: lang,
+    pageType: "blog",
+    siteName: "Gökberk Keskinkılıç",
+    contentId,
+    datePublished,
+    dateModified,
+    featuredImage: entry.featuredImage,
+    imageAlt: entry.title,
+    baseUrl: "https://gokiberk.com",
+    twitterHandle: "@gokiberk",
+    authorName: "Gökberk Keskinkılıç",
+    authorUrl: "https://gokiberk.com",
+    authorImage: "/img/author.jpg"
+  });
+}
 
 // This is now a Server Component
 // Async function is needed to await data fetching
@@ -39,34 +78,12 @@ export default async function WritingEntryPage({ params }) {
 
   // Pass fetched data to the Client Component for rendering and interactivity
   return (
-    <>
-      <BlogHeadComponent
-        title={title}
-        metaDescription={metaDescription}
-        metaTitle={metaTitle}
-        slug={slug}
-        language={lang}
-        pageType="blog"
-        siteName="My Blog" // Replace with your site name
-        contentId={contentId}
-        datePublished={datePublished}
-        dateModified={dateModified}
-        featuredImage={entry.featuredImage} // Assuming featuredImage is in entry data
-        imageAlt={entry.title} // Use title as image alt if no specific alt is available
-        baseUrl="https://gokiberk.com" // Replace with your base URL
-        twitterHandle="@gokiberk" // Replace with your twitter handle
-        authorName="Gokiberk" // Replace with your author name
-        authorUrl="https://gokiberk.com" // Replace with your author URL
-        authorImage="/img/author.jpg" // Replace with your author image path
-        // Add other relevant props if available in entry: tags, category, readingTime, excerpt
-      />
-      <WritingEntryClient
-        entry={entry}
-        allEntriesMetadata={allEntriesMetadata}
-        lang={lang}
-        contentId={contentId}
-        allUrls={allUrls}
-      />
-    </>
+    <WritingEntryClient
+      entry={entry}
+      allEntriesMetadata={allEntriesMetadata}
+      lang={lang}
+      contentId={contentId}
+      allUrls={allUrls}
+    />
   );
 } 

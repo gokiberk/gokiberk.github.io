@@ -2,8 +2,8 @@
   "slug": "finike-gunlugu",
   "contentId": "finike-diary",
   "title": "Finike Günlüğü",
-  "metaTitle": "Finike Gezi Günlüğü: Portakal Bahçeleri Arasında Huzurlu Bir Kaçamak",
-  "metaDescription": "Finike'de geçirdiğimiz birkaç günün huzur dolu notları: portakal kokuları, Turkuazköy'de doğayla iç içe bir tatil, Neşeli Balık'ta unutulmaz bir akşam yemeği ve Kaş'a uzanan bir yolculuk.",
+  "metaTitle": "Finike Gezi Günlüğü: Portakal Bahçeleri Arasında Bir Kaçamak",
+  "metaDescription": "Finike'de geçirdiğimiz üç gün: portakal kokuları, Neşeli Balık'ta unutulmaz bir akşam yemeği ve Kaş'a uzanan bir yolculuk.",
   "primaryKeyword": "finike gezi rehberi",
   "secondaryKeywords": [
     "finike",
@@ -51,7 +51,7 @@
     },
     {
       "type": "h2",
-      "text": "Turkuazköy'de Doğa ve Sadelik"
+      "text": "Turkuaz Köy'de Doğa ve Sadelik"
     },
     {
       "type": "p",

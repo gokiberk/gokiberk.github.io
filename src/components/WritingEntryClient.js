@@ -39,7 +39,7 @@ export default function WritingEntryClient({ entry, allEntriesMetadata, lang, co
         {/* Article Navigation (Desktop Only) */}
         <aside className="w-72 flex-shrink-0 border-r border-gray-200 overflow-y-auto pt-16 hidden lg:block sticky top-0 h-screen hover:overflow-y-auto" style={{ pointerEvents: 'auto' }}>
           <div className="p-4">
-            <h3 className="text-lg font-semibold mb-4">{isTurkish ? 'Yazılar' : 'Writing Entries'}</h3>
+            <p className="text-lg font-semibold mb-4">{isTurkish ? 'Yazılar' : 'Writing Entries'}</p>
             <ul>
               {/* Sidebar should still show all entries, filtered by the language of the main page */}
               {allEntriesMetadata

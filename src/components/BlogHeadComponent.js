@@ -1,14 +1,13 @@
-import React from 'react';
-import Head from 'next/head';
+import { Metadata } from 'next';
 
-const BlogHeadComponent = ({
+export function generateMetadata({
   title = 'My Personal Blog',
   metaDescription = 'Welcome to my personal blog where I share my thoughts, experiences, and adventures.',
   metaTitle,
   slug = '',
   language = 'en',
   pageType = "blog", // blog, homepage, page
-  siteName = 'My Blog',
+  siteName = 'Gökberk Keskinkılıç',
   contentId = '',
   dateModified,
   datePublished,
@@ -18,7 +17,7 @@ const BlogHeadComponent = ({
   // Blog specific
   authorName = 'Your Name',
   authorUrl = '',
-  authorImage = '/img/author.jpg',
+  authorImage = '/img/me.avif',
   
   // Content specific
   featuredImage = '/img/default-og.jpg',
@@ -33,23 +32,22 @@ const BlogHeadComponent = ({
   readingTime = '',
   
   // Site config
-  baseUrl = 'https://yourblog.com',
-  twitterHandle = '@yourblog',
+  baseUrl = 'https://gokiberk.com',
+  twitterHandle = '@gokiberk',
   
   // Additional meta
   excerpt = ''
-}) => {
-  
+}) {
   // Generate canonical URL
   const canonicalUrl = slug 
-    ? `${baseUrl}/${slug}/`
+    ? `${baseUrl}/writing${language === 'tr' ? '/tr' : ''}/${slug}`
     : baseUrl;
   
   // Set featured image URL
   const imageUrl = featuredImage.startsWith('http') 
     ? featuredImage 
     : `${baseUrl}${featuredImage}`;
-  
+
   // Generate structured data for blog posts
   const generateSchemaData = () => {
     const baseSchema = {
@@ -211,72 +209,64 @@ const BlogHeadComponent = ({
     return baseSchema;
   };
 
-  const schemaData = JSON.stringify(generateSchemaData(), null, 0);
+  const metadata = {
+    title: metaTitle || title,
+    description: metaDescription,
+    metadataBase: new URL(baseUrl),
+    alternates: {
+      canonical: canonicalUrl,
+    },
+    openGraph: {
+      title: metaTitle || title,
+      description: metaDescription,
+      url: canonicalUrl,
+      siteName: siteName,
+      images: [
+        {
+          url: imageUrl,
+          width: imageWidth,
+          height: imageHeight,
+          alt: imageAlt,
+        },
+      ],
+      locale: language === 'en' ? 'en_US' : language,
+      type: pageType === 'blog' ? 'article' : 'website',
+    },
+    twitter: {
+      card: 'summary_large_image',
+      title: metaTitle || title,
+      description: metaDescription,
+      images: [imageUrl],
+      creator: twitterHandle,
+    },
+    robots: {
+      index: indexStatus === 'index',
+      follow: followStatus === 'follow',
+    },
+    authors: [{ name: authorName, url: authorUrl }],
+    other: {
+      'article:published_time': datePublished,
+      'article:modified_time': dateModified,
+      ...(category && { 'article:section': category }),
+      ...(tags.length > 0 && { 'article:tag': tags.join(', ') }),
+      ...(readingTime && { 'reading-time': `${readingTime} min read` }),
+    },
+    verification: {
+      google: 'your-google-site-verification',
+    },
+  };
 
-  return (
-    <Head>
-      {/* Basic Meta Tags */}
-      <title>{title}</title>
-      <meta name="description" content={metaDescription} />
-      <meta name="title" content={metaTitle} />
-      <meta name="robots" content={`${indexStatus}, ${followStatus}`} />
-      <meta name="viewport" content="width=device-width, initial-scale=1" />
-      <link rel="canonical" href={canonicalUrl} />
-      
-      {/* Favicon */}
-      <link rel="icon" href="/favicon.ico" />
-      <link rel="apple-touch-icon" href="/apple-touch-icon.png" />
-      
-      {/* Open Graph Tags */}
-      <meta property="og:type" content={pageType === 'blog' ? 'article' : 'website'} />
-      <meta property="og:title" content={metaTitle} />
-      <meta property="og:description" content={metaDescription} />
-      <meta property="og:image" content={imageUrl} />
-      <meta property="og:image:width" content={imageWidth.toString()} />
-      <meta property="og:image:height" content={imageHeight.toString()} />
-      {imageAlt && <meta property="og:image:alt" content={imageAlt} />}
-      <meta property="og:url" content={canonicalUrl} />
-      <meta property="og:site_name" content={siteName} />
-      <meta property="og:locale" content={language === 'en' ? 'en_US' : language} />
-      
-      {/* Article specific Open Graph tags */}
-      {pageType === 'blog' && (
-        <>
-          <meta property="article:author" content={authorName} />
-          {datePublished && <meta property="article:published_time" content={datePublished} />}
-          {dateModified && <meta property="article:modified_time" content={dateModified} />}
-          {category && <meta property="article:section" content={category} />}
-          {tags.map((tag, index) => (
-            <meta key={index} property="article:tag" content={tag} />
-          ))}
-        </>
-      )}
-      
-      {/* Twitter Card Tags */}
-      <meta name="twitter:card" content="summary_large_image" />
-      <meta name="twitter:title" content={metaTitle} />
-      <meta name="twitter:description" content={metaDescription} />
-      <meta name="twitter:image" content={imageUrl} />
-      {imageAlt && <meta name="twitter:image:alt" content={imageAlt} />}
-      {twitterHandle && <meta name="twitter:site" content={twitterHandle} />}
-      {authorUrl && <meta name="twitter:creator" content={twitterHandle} />}
-      
-      {/* Additional Meta Tags */}
-      {authorName && <meta name="author" content={authorName} />}
-      {category && <meta name="article:section" content={category} />}
-      {tags.length > 0 && <meta name="keywords" content={tags.join(', ')} />}
-      {readingTime && <meta name="reading-time" content={`${readingTime} min read`} />}
-      
-      {/* Language */}
-      <meta httpEquiv="content-language" content={language} />
-      
-      {/* Structured Data */}
-      <script
-        type="application/ld+json"
-        dangerouslySetInnerHTML={{ __html: schemaData }}
-      />
-    </Head>
-  );
-};
+  // Add structured data
+  metadata.other = {
+    ...metadata.other,
+    'application/ld+json': JSON.stringify(generateSchemaData()),
+  };
 
-export default BlogHeadComponent;
+  return metadata;
+}
+
+export default function BlogHeadComponent(props) {
+  // This component is now just a wrapper that generates metadata
+  // The actual metadata is handled by Next.js through the generateMetadata function
+  return null;
+}
