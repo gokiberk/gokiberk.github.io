@@ -55,7 +55,7 @@ export default async function WritingPage() {
             </div>
             <h1 className="text-4xl font-extrabold mb-8">Writing</h1>
             <p className="text-gray-700 leading-relaxed mb-6">
-              Welcome to my writing section. Here you'll find articles about technology, personal experiences, and various projects I've worked on.
+              Welcome to my writing section. Here you'll find articles about travelling, personal experiences, and various projects I've worked on.
               Feel free to explore the entries listed below.
             </p>
             <div className="grid gap-6 md:grid-cols-2">
