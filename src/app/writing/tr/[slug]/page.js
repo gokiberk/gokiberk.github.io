@@ -61,6 +61,18 @@ export default async function WritingEntryPageTR({ params }) {
   // Fetch the list of all entries metadata for the sidebar on the server
   const allEntriesMetadata = getAllWritingEntriesMetadata();
 
+  // Gather related blog entries (full data)
+  let relatedBlogEntries = [];
+  if (entry.relatedBlogs && entry.relatedBlogs.length > 0) {
+    relatedBlogEntries = entry.relatedBlogs.map((relatedSlug) => {
+      // Try to find the language for the related blog
+      const relatedLang = 'tr';
+      // Find the Turkish corresponding value for the given relatedSlug
+      const trSlug = allUrls[relatedSlug]?.tr || relatedSlug;
+      return getWritingEntryBySlug(trSlug, relatedLang);
+    }).filter(Boolean);
+  }
+
   // Handle case where entry is not found
   if (!entry) {
     return <div>İçerik bulunamadı</div>;
@@ -73,6 +85,7 @@ export default async function WritingEntryPageTR({ params }) {
       lang={lang}
       contentId={contentId}
       allUrls={allUrls}
+      relatedBlogEntries={relatedBlogEntries}
     />
   );
 } 

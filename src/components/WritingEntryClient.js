@@ -6,7 +6,7 @@ import Link from 'next/link';
 import { usePathname } from 'next/navigation';
 import allUrls from '@/data/allUrls.json';
 
-export default function WritingEntryClient({ entry, allEntriesMetadata, lang, contentId, allUrls }) {
+export default function WritingEntryClient({ entry, allEntriesMetadata, lang, contentId, allUrls, relatedBlogEntries = [] }) {
   const pathname = usePathname();
   const isTurkish = lang === 'tr';
   const currentSlug = pathname.split('/').pop();
@@ -28,6 +28,15 @@ export default function WritingEntryClient({ entry, allEntriesMetadata, lang, co
 
   // Find the first h1 block in the content
   const mainH1Block = entry.content.find(block => block.type === 'h1');
+
+  // Helper to generate the correct blog link
+  function getBlogLink(blogEntry) {
+    // If the current page is Turkish, always use the Turkish slug
+    if (lang === 'tr') return `/writing/tr/${blogEntry.slug}`;
+    if (blogEntry.language === 'en') return `/writing/${blogEntry.slug}`;
+    if (blogEntry.language === 'tr') return `/writing/tr/${blogEntry.slug}`;
+    return `/writing/${blogEntry.language}/${blogEntry.slug}`;
+  }
 
   return (
     <div className="flex flex-col md:flex-row min-h-screen">
@@ -66,7 +75,7 @@ export default function WritingEntryClient({ entry, allEntriesMetadata, lang, co
         </aside>
 
         {/* Main Content */}
-        <main className="flex-1 overflow-y-auto md:pt-8 transition-all duration-300" style={{ pointerEvents: 'none' }}>
+        <main className="flex-1 overflow-y-auto md:pt-8 transition-all duration-300">
           <div className="p-4 md:p-8 lg:p-12 max-w-[800px] mx-auto">
             {/* Language Switcher */}
             <div className="flex justify-end mb-4" style={{ pointerEvents: 'auto' }}>
@@ -141,6 +150,32 @@ export default function WritingEntryClient({ entry, allEntriesMetadata, lang, co
                 </div>
               ))}
             </div>
+            {/* Further Reading Section - now inside the main content width */}
+            {relatedBlogEntries.length > 0 && (
+              <div className="mt-12">
+                <h2 className="text-2xl font-bold mb-4">{isTurkish ? "Daha Fazla Okuma" : "Further Reading"}</h2>
+                <div className="grid gap-6 md:grid-cols-2">
+                  {relatedBlogEntries.map((related) => (
+                    <Link
+                      key={related.slug}
+                      href={getBlogLink(related)}
+                      className="block border border-gray-200 rounded-lg hover:border-blue-500 transition-colors duration-200 p-4 cursor-pointer h-full"
+                    >
+                      {related.featuredImage ? (
+                        <img
+                          src={related.featuredImage}
+                          alt={related.title}
+                          className="w-full object-cover rounded mb-2"
+                        />
+                      ) : (
+                        <div className="w-full h-40 bg-gray-100 rounded mb-2 flex items-center justify-center text-gray-400">No Image</div>
+                      )}
+                      <h3 className="text-lg font-semibold text-gray-800">{related.title}</h3>
+                    </Link>
+                  ))}
+                </div>
+              </div>
+            )}
           </div>
         </main>
       </div>

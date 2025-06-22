@@ -63,6 +63,17 @@ export default async function WritingEntryPage({ params }) {
   // Fetch the list of all entries metadata for the sidebar on the server
   const allEntriesMetadata = getAllWritingEntriesMetadata();
 
+  // Gather related blog entries (full data)
+  let relatedBlogEntries = [];
+  if (entry.relatedBlogs && entry.relatedBlogs.length > 0) {
+    relatedBlogEntries = entry.relatedBlogs.map((relatedSlug) => {
+      // Try to find the language for the related blog
+      const relatedMeta = allEntriesMetadata.find(e => e.slug === relatedSlug);
+      const relatedLang = relatedMeta ? relatedMeta.language : 'en';
+      return getWritingEntryBySlug(relatedSlug, relatedLang);
+    }).filter(Boolean);
+  }
+
   // Handle case where entry is not found (e.g., invalid slug)
   if (!entry) {
     // In a Server Component, you can return a 404 page or specific UI
@@ -84,6 +95,7 @@ export default async function WritingEntryPage({ params }) {
       lang={lang}
       contentId={contentId}
       allUrls={allUrls}
+      relatedBlogEntries={relatedBlogEntries}
     />
   );
 } 
