@@ -13,6 +13,7 @@
   "language": "en",
   "author": "Gökberk Keskinkılıç",
   "featuredImage": "/gallery/paris.jpg",
+  "relatedBlogs": ["trip-to-italy"],
   "content": [
     {
       "type": "h1",

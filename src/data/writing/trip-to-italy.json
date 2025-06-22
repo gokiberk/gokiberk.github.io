@@ -16,6 +16,7 @@
   "date": "February 21, 2022",
   "author": "Gökberk Keskinkılıç",
   "featuredImage": "/gallery/italy.jpg",
+  "relatedBlogs": ["erasmus-in-paris"],
   "content": [
     {
       "type": "h1",
