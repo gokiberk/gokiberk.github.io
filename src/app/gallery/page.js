@@ -21,6 +21,15 @@ export default function Gallery() {
   const toggleMenu = () => setIsSidebarCollapsed(!isSidebarCollapsed);
 
   return (
+    <>
+    <Head>
+      <title>Travel | Gökberk Keskinkılıç</title>
+      <meta name="description" content="Gallery by Gökberk Keskinkılıç." />
+      <meta property="og:title" content="Gallery | Gökberk Keskinkılıç" />
+      <meta property="og:description" content="Gallery by Gökberk Keskinkılıç." />
+      <meta property="og:image" content="/img/og-gokiberk.webp" />
+      <link rel="canonical" href="https://gokiberk.com/gallery" />
+    </Head>
     <div className="flex flex-col md:flex-row min-h-screen">
       {/* Sidebar */}
       <SideMenu
@@ -74,5 +83,6 @@ export default function Gallery() {
         </div>
       </main>
     </div>
+    </>
   );
 }

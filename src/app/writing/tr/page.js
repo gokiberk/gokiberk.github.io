@@ -40,6 +40,15 @@ export default async function WritingPageTR() {
   const validEntries = turkishEntries.filter(Boolean);
 
   return (
+    <>
+    <Head>
+      <title>Travel | Gökberk Keskinkılıç</title>
+      <meta name="description" content="Gökberk Keskinkılıç'ın maceraları hakkında yazıları." />
+      <meta property="og:title" content="Yazılar | Gökberk Keskinkılıç" />
+      <meta property="og:description" content="Gökberk Keskinkılıç'ın maceraları hakkında yazıları" />
+      <meta property="og:image" content="/img/og-gokiberk.webp" />
+      <link rel="canonical" href="https://gokiberk.com/writing/tr" />
+    </Head>
     <div className="flex flex-col md:flex-row min-h-screen">
       {/* Sidebar */}
       <SideMenu />
@@ -90,5 +99,6 @@ export default async function WritingPageTR() {
         </main>
       </div>
     </div>
+    </>
   );
 } 

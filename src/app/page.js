@@ -54,9 +54,7 @@ export default function Page() {
         <div className="p-4 md:p-8 lg:p-12 max-w-[1000px] mx-auto">
           {/* Introductory Bio Text */}
           <div className="mb-6">
-            <p className="mb-8 text-gray-700">
-              Merhaba, ben Gökberk{"  "}-{" "}Hi, I am Gökberk (Goki) - Oi, Aqui é Goki 🤙🏽
-            </p>
+            <h1 className="mb-8 text-gray-700 inline">Merhaba, ben Gökberk</h1><p className="mb-8 text-gray-700 inline"> - Hi, I am Gökberk (Goki) - Oi, Aqui é Goki 🤙🏽</p>
           </div>
 
           {/* Work Experience Summary */}

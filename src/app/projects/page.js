@@ -29,6 +29,15 @@ export default function Projects() {
   }, {});
 
   return (
+    <>
+    <Head>
+      <title>Travel | Gökberk Keskinkılıç</title>
+      <meta name="description" content="Projects by Gökberk Keskinkılıç." />
+      <meta property="og:title" content="Projects | Gökberk Keskinkılıç" />
+      <meta property="og:description" content="Projects by Gökberk Keskinkılıç." />
+      <meta property="og:image" content="/img/og-gokiberk.webp" />
+      <link rel="canonical" href="https://gokiberk.com/projects" />
+    </Head>
     <div className="flex flex-col md:flex-row min-h-screen">
       {/* Sidebar */}
       <SideMenu
@@ -76,5 +85,6 @@ export default function Projects() {
         </div>
       </main>
     </div>
+    </>
   );
 }
