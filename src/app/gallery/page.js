@@ -4,6 +4,7 @@ import { SideMenu } from "@/components/SideMenu";
 import { PageTitle } from "@/components/PageTitle";
 import Img from 'next/image';
 import { useState, useEffect } from 'react';
+import Head from 'next/head';
 
 export default function Gallery() {
   const [isMobile, setIsMobile] = useState(false);

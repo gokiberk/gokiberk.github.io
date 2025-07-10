@@ -3,6 +3,7 @@ import { SideMenu } from "@/components/SideMenu";
 import { LanguageSwitcher } from "@/components/LanguageSwitcher";
 import Link from 'next/link';
 import allUrls from '@/data/allUrls.json';
+import Head from 'next/head';
 
 export default async function WritingPage() {
   // Fetch all entries metadata on the server

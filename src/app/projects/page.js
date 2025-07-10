@@ -5,6 +5,7 @@ import { PageTitle } from "@/components/PageTitle";
 import { useState, useEffect } from 'react';
 import projects from '@/data/projects/index.json';
 import Link from 'next/link';
+import Head from 'next/head';
 
 export default function Projects() {
   const [isMobile, setIsMobile] = useState(false);

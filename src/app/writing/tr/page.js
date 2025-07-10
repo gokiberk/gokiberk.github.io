@@ -4,6 +4,7 @@ import Link from 'next/link';
 import { promises as fs } from 'fs';
 import path from 'path';
 import allUrls from '@/data/allUrls.json';
+import Head from 'next/head';
 
 // Helper function to read and parse JSON file
 async function readJsonFile(filePath) {
