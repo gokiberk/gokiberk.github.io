@@ -5,6 +5,7 @@ import Link from 'next/link';
 import { NavigationLink } from '@/components/NavigationLink';
 import { PROFILES, LINKS } from '@/lib/constants';
 import { HamburgerMenu } from '@/components/HamburgerMenu';
+import Image from 'next/image';
 
 export const SideMenu = () => {
   const [isMobile, setIsMobile] = useState(false); // Track if the screen is small
@@ -48,12 +49,13 @@ export const SideMenu = () => {
         {/* User Profile */}
         {/* Show profile details on desktop, hidden on mobile sidebar when collapsed */}
         <div className={`flex items-center p-4 w-full ${isMobile ? '' : 'flex-col'}`}>
-          <img
+          <Image
             src="/img/me.avif"
             alt="Gökberk Keskinkılıç"
-            width={isMobile ? 50 : 50}
-            height={isMobile ? 50 : 50}
+            width={50}
+            height={50}
             className="rounded-full border shadow-sm flex-shrink-0"
+            priority
           />
           {/* Show text always on desktop, and on mobile sidebar when open */}
           {!isMobile ? (

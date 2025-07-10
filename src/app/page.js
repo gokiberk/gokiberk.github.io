@@ -6,6 +6,7 @@ import { BioDetail } from "@/components/BioDetail";
 import { useState, useEffect } from "react";
 import { imageConfigDefault } from "next/dist/shared/lib/image-config";
 import Head from 'next/head';
+import Image from 'next/image';
 
 export default function Page() {
   const [isMobile, setIsMobile] = useState(false);
@@ -84,14 +85,14 @@ export default function Page() {
 
             {/* Gallery Card */}
             <a href="/gallery" className="block bg-gradient-to-b from-gray-900 via-gray-700 to-gray-500 text-white p-6 rounded-lg shadow-lg hover:shadow-xl transition-shadow duration-200 flex flex-col">
-              <img src="/gallery/engagement.jpg" alt="Engagement" width={400} height={250} className="rounded-md mb-4 object-cover w-full" />
+              <Image src="/gallery/engagement.jpg" alt="Engagement" width={332} height={221} className="rounded-md mb-4 object-cover w-full" sizes="(max-width: 400px) 100vw, 332px" priority />
               <h2 className="text-xl font-bold mb-2">📸 Gallery</h2>
               <p className="text-gray-200">Latest addition: Engagement Photo.</p>
             </a>
 
             {/* Travel Card */}
             <a href="/travel" className="block bg-gradient-to-b from-gray-900 via-gray-700 to-gray-500 text-white p-6 rounded-lg shadow-lg hover:shadow-xl transition-shadow duration-200 flex flex-col">
-              <img src="/gallery/greekEaster.jpg" alt="Greek Easter" width={400} height={250} className="rounded-md mb-4 object-cover w-full" />
+              <Image src="/gallery/greekEaster.jpg" alt="Greek Easter" width={332} height={221} className="rounded-md mb-4 object-cover w-full" sizes="(max-width: 400px) 100vw, 332px" priority />
               <h2 className="text-xl font-bold mb-2">🏕️ Travel</h2>
               <p className="text-gray-200">Recently: Greek Easter.</p>
             </a>
