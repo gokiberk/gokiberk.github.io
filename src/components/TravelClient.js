@@ -68,7 +68,7 @@ export default function TravelClient() {
             </p>
           </header>
 
-          <div className="grid gap-8 lg:grid-cols-[240px_minmax(0,1fr)] items-start">
+          <div className="grid gap-8 lg:grid-cols-[240px_minmax(0,1fr)] items-stretch lg:h-[min(82vh,780px)]">
             <TravelMap
               ref={mapRef}
               selectedId={selectedId}
@@ -78,8 +78,8 @@ export default function TravelClient() {
               hoveredId={hoveredId}
             />
 
-            <aside aria-label="Places" className="order-last lg:order-first">
-              <div className="lg:sticky lg:top-8 lg:max-h-[calc(100vh-4rem)] lg:overflow-y-auto bg-blue-50/60 border border-blue-100 rounded-xl p-5">
+            <aside aria-label="Places" className="order-last lg:order-first lg:h-full lg:min-h-0">
+              <div className="h-full overflow-y-auto bg-blue-50/60 border border-blue-100 rounded-xl p-5">
                 <p className="flex items-center gap-2 text-[11px] font-bold uppercase tracking-wider text-blue-700 mb-3">
                   <span
                     aria-hidden="true"

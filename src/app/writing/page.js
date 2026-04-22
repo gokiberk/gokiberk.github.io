@@ -39,17 +39,25 @@ export default async function WritingPage() {
       <SideMenu />
 
       <div className="flex flex-1 flex-col md:flex-row md:ml-64">
-        <aside className="w-72 flex-shrink-0 border-r border-gray-200 overflow-y-auto pt-16 hidden lg:block">
+        <aside
+          className="w-72 flex-shrink-0 border-r border-gray-200 overflow-y-auto pt-8 hidden xl:block sticky top-0 h-screen"
+          aria-label="Writing entries"
+        >
           <div className="p-4">
-            <h2 className="text-lg font-semibold mb-4">Writing entries</h2>
+            <p className="text-xs font-bold uppercase tracking-wider text-gray-500 mb-4">
+              Writing entries
+            </p>
             <ul>
               {englishEntries.map((entry) => (
                 <li key={entry.slug} className="mb-3 last:mb-0">
-                  <Link href={`/writing/${entry.slug}`} className="block group">
-                    <p className="text-gray-800 group-hover:text-blue-600 transition-colors duration-200 font-medium">
+                  <Link
+                    href={`/writing/${entry.slug}`}
+                    className="block group rounded-md px-2 py-1 -mx-2 transition-colors hover:bg-gray-50"
+                  >
+                    <p className="font-medium leading-snug text-gray-800 group-hover:text-blue-700 transition-colors">
                       {entry.title}
                     </p>
-                    <p className="text-gray-500 text-sm">{entry.date}</p>
+                    <p className="text-gray-500 text-xs mt-0.5">{entry.date}</p>
                   </Link>
                 </li>
               ))}
@@ -58,7 +66,7 @@ export default async function WritingPage() {
         </aside>
 
         <main className="flex-1 overflow-y-auto pt-16 md:pt-0 transition-all duration-300">
-          <div className="p-4 md:p-8 lg:p-12 max-w-[800px] mx-auto">
+          <div className="px-4 md:px-8 lg:px-12 py-6 md:py-10 max-w-[1600px] mx-auto">
             <div className="flex justify-end mb-4">
               <LanguageSwitcher contentId="writing" allUrls={allUrls} />
             </div>
@@ -67,7 +75,7 @@ export default async function WritingPage() {
               Welcome to my writing. Here you&apos;ll find essays about travel, personal
               experiences and the occasional project. Feel free to explore the entries below.
             </p>
-            <div className="grid gap-6 md:grid-cols-2">
+            <div className="grid gap-6 sm:grid-cols-2 lg:grid-cols-3 xl:grid-cols-4">
               {englishEntries.map((entry) => (
                 <Link
                   key={entry.slug}
@@ -87,7 +95,7 @@ export default async function WritingPage() {
                     <div className="aspect-[16/9] w-full bg-gray-100" aria-hidden="true" />
                   )}
                   <div className="p-5">
-                    <h2 className="text-xl font-semibold mb-1 text-gray-900 group-hover:text-blue-700 transition-colors">
+                    <h2 className="text-lg font-semibold mb-1 text-gray-900 group-hover:text-blue-700 transition-colors leading-snug">
                       {entry.title}
                     </h2>
                     <p className="text-gray-500 text-sm">{entry.date}</p>

@@ -40,15 +40,14 @@ export const CONTINENTS = {
   asia: { label: 'Asia', bounds: [[26, -11], [150, 75]] },
 };
 
-// Pre-compute static info about every country feature (path, centroid, area).
+// Pre-compute static info about every country feature (path data only; we
+// render the SVG but no longer label unvisited countries).
 const countryRecords = allCountries.map((f) => ({
   id: f.id ?? f.properties?.name,
   rawId: f.id,
   name: f.properties?.name,
   feature: f,
   d: basePath(f),
-  centroid: basePath.centroid(f),
-  area: basePath.area(f),
 }));
 const recordById = new Map();
 countryRecords.forEach((r) => r.rawId && recordById.set(r.rawId, r));
@@ -158,17 +157,99 @@ function useZoomTween(target, duration = TRANSITION_MS) {
 // to the bottom edge of the label instead of its center).
 const LABEL_HALF_HEIGHT = 11;
 
-// Pre-compute pin (base pixel) and label-offset (base pixel) for each visited
-// country. Pin defaults to the first listed city's coords.
+// Auto label-distribution. Given an array of `{ id, pos: [x, y] }` in screen
+// coordinates, returns a Map<id, [dx, dy]> of screen-pixel offsets from each
+// pin to its label.
+//
+// Rules (modeled after real tag-on-a-pin behavior):
+//   - default: label sits directly above the pin at `defaultDy` (no leader).
+//   - when neighbors are within `clusterRadius`, the label is fanned along
+//     the top hemisphere (`vy` is clamped negative so labels never dip
+//     below the pin) in the direction of the pin inside its cluster.
+//   - horizontal direction comes from the pin's x-offset within the cluster
+//     (leftmost city → label leans left, rightmost → leans right).
+//   - vertical direction is always "up", with a small extra lift for pins
+//     that sit in the upper half of the cluster so stacked pins stagger.
+//   - spread stays small so leader lines are short; it grows mildly with
+//     cluster size so dense regions (Europe at world zoom, NE-Brazil at
+//     country zoom) still resolve.
+//   - identical coords fall back to a deterministic per-id angle (still in
+//     the top half) so stacked pins separate.
+function computeLabelOffsets(
+  points,
+  {
+    clusterRadius = 55,
+    defaultDy = -20,
+    baseSpread = 22,
+    spreadPerNeighbor = 3.5,
+    maxSpread = 80,
+  } = {},
+) {
+  const result = new Map();
+  const r2 = clusterRadius * clusterRadius;
+  for (const p of points) {
+    const neighbors = [];
+    for (const q of points) {
+      if (q === p) continue;
+      const dx = p.pos[0] - q.pos[0];
+      const dy = p.pos[1] - q.pos[1];
+      if (dx * dx + dy * dy < r2) neighbors.push(q);
+    }
+    if (neighbors.length === 0) {
+      result.set(p.id, [0, defaultDy]);
+      continue;
+    }
+    const cluster = [p, ...neighbors];
+    let cx = 0;
+    let cy = 0;
+    for (const c of cluster) {
+      cx += c.pos[0];
+      cy += c.pos[1];
+    }
+    cx /= cluster.length;
+    cy /= cluster.length;
+    let vx = p.pos[0] - cx;
+    let vy = p.pos[1] - cy;
+    const len = Math.hypot(vx, vy);
+    if (len < 1e-4) {
+      // Pin exactly at cluster center — pick a deterministic angle in the
+      // top half (between ~-135° and ~-45° from horizontal) based on id so
+      // stacked pins still separate predictably.
+      const seed = String(p.id)
+        .split('')
+        .reduce((s, ch) => s + ch.charCodeAt(0), 0);
+      const a = ((seed * 137) % 180) * (Math.PI / 180); // 0..π
+      vx = Math.cos(a + Math.PI); // maps to [-1..1]
+      vy = -Math.abs(Math.sin(a + Math.PI)) - 0.2; // forced upward
+    } else {
+      vx /= len;
+      vy /= len;
+      // Clamp label into the top hemisphere: labels never drop below the pin.
+      // Pins in the lower half of the cluster still get pushed up so they
+      // look like real pins hanging from above.
+      vy = Math.min(vy, -0.3);
+    }
+    const n = Math.hypot(vx, vy) || 1;
+    vx /= n;
+    vy /= n;
+    const rawSpread = baseSpread + neighbors.length * spreadPerNeighbor;
+    const spread = Math.min(rawSpread, maxSpread);
+    result.set(p.id, [vx * spread, vy * spread]);
+  }
+  return result;
+}
+
+// Pre-compute each visited country's pin position in base-projection pixels.
+// The label offset is derived automatically at render time via
+// `computeLabelOffsets` (see below). Pin defaults to the first listed city's
+// coords and can be overridden via `pinCoords` in travel data.
 const visitedMarkers = visitedCountries
   .map((c) => {
     const pinCoords = c.pinCoords || c.cities?.[0]?.coords;
     if (!pinCoords) return null;
     const pinBase = baseProjection(pinCoords);
     if (!pinBase || !Number.isFinite(pinBase[0])) return null;
-    const offset = c.labelOffset || [0, -14];
-    const labelBase = [pinBase[0] + offset[0], pinBase[1] + offset[1]];
-    return { country: c, pinBase, labelBase };
+    return { country: c, pinBase };
   })
   .filter(Boolean);
 
@@ -185,6 +266,63 @@ const TravelMap = forwardRef(function TravelMap(
   useEffect(() => {
     setZoomMult(1);
   }, [selectedId, continent]);
+
+  // User-controlled pan offset (view-space pixels). Applied on top of the
+  // animated transform. Reset when the active view changes so every new
+  // target is centered cleanly.
+  const [pan, setPan] = useState({ x: 0, y: 0 });
+  useEffect(() => {
+    setPan({ x: 0, y: 0 });
+  }, [selectedId, continent, zoomMult]);
+
+  // Drag-pan handling. We track the pointer in refs so updates don't cause
+  // re-renders until the pan itself changes.
+  const dragRef = useRef(null);
+  const innerRef = useRef(null);
+  const [dragging, setDragging] = useState(false);
+
+  function handlePointerDown(e) {
+    if (e.button !== undefined && e.button !== 0) return;
+    const targetEl = e.target;
+    // Don't start a drag when the user clicks an interactive element (country
+    // path, pin label button, controls, etc.).
+    if (targetEl && targetEl.closest && targetEl.closest('button, a, [role="tab"]')) {
+      return;
+    }
+    dragRef.current = {
+      startX: e.clientX,
+      startY: e.clientY,
+      basePan: pan,
+      pointerId: e.pointerId,
+    };
+    setDragging(true);
+    innerRef.current?.setPointerCapture?.(e.pointerId);
+  }
+
+  function handlePointerMove(e) {
+    if (!dragRef.current) return;
+    const { startX, startY, basePan } = dragRef.current;
+    // Pointer moves in screen pixels, but the SVG viewBox maps 1 unit to
+    // roughly `innerWidth / WIDTH` pixels. Scale the delta back into viewBox
+    // units so the map appears to follow the cursor 1:1.
+    const rect = innerRef.current?.getBoundingClientRect();
+    const scale = rect ? WIDTH / rect.width : 1;
+    const dx = (e.clientX - startX) * scale;
+    const dy = (e.clientY - startY) * scale;
+    setPan({ x: basePan.x + dx, y: basePan.y + dy });
+  }
+
+  function handlePointerUp(e) {
+    if (!dragRef.current) return;
+    const id = dragRef.current.pointerId;
+    dragRef.current = null;
+    setDragging(false);
+    try {
+      innerRef.current?.releasePointerCapture?.(id);
+    } catch (_) {
+      // no-op: pointer already released
+    }
+  }
 
   // Compute the target transform for the active view.
   const target = useMemo(() => {
@@ -212,7 +350,13 @@ const TravelMap = forwardRef(function TravelMap(
   const canZoomIn = zoomMult < 4;
   const canZoomOut = zoomMult > 0.5;
 
-  const { s, tx, ty, animating } = useZoomTween(target);
+  const { s, tx: baseTx, ty: baseTy, animating } = useZoomTween(target);
+
+  // Effective translate includes the user's pan offset. Pan is not included
+  // in the tween target on purpose — the tween handles continent/country
+  // transitions while pan gives the user fine control on top.
+  const tx = baseTx + pan.x;
+  const ty = baseTy + pan.y;
 
   // Helper: base pixel (cx, cy) → current view pixel (vx, vy).
   function toView(cx, cy) {
@@ -227,31 +371,70 @@ const TravelMap = forwardRef(function TravelMap(
     return { left: `${(vx / WIDTH) * 100}%`, top: `${(vy / HEIGHT) * 100}%` };
   }
 
-  // Visible unvisited-country labels for continent views. Hidden during zoom
-  // animation and in the world view (too cluttered).
-  const labels = useMemo(() => {
-    if (selectedId || continent === 'world') return [];
-    return countryRecords.flatMap((r) => {
-      if (!r.rawId || visitedMap.has(r.rawId)) return [];
-      if (!Number.isFinite(r.centroid[0])) return [];
-      const [vx, vy] = toView(r.centroid[0], r.centroid[1]);
-      if (!inFrame(vx, vy, 0)) return [];
-      // Only label countries that take up a meaningful area at the target zoom.
-      if (r.area * target.s * target.s < 600) return [];
-      return [{ id: r.id, name: r.name, vx, vy }];
-    });
-    // Recompute when view changes (zoom values affect visibility).
-    // eslint-disable-next-line react-hooks/exhaustive-deps
-  }, [continent, selectedId, s, tx, ty]);
+  // Auto-distributed label offsets. For each pin, default is a fixed height
+  // above it; if neighbors are within `CLUSTER_RADIUS` screen px, the pin's
+  // label is pushed radially outward from the local cluster's centroid (with a
+  // small upward bias and extra spread for denser clusters). Recomputed when
+  // the target view changes so the geometry always matches what's on screen.
+  const countryLabelOffsets = useMemo(() => {
+    if (selectedId) return new Map();
+    const points = visitedMarkers
+      .map(({ country, pinBase }) => ({
+        id: country.id,
+        pos: [
+          pinBase[0] * target.s + target.tx,
+          pinBase[1] * target.s + target.ty,
+        ],
+      }))
+      .filter(
+        ({ pos }) =>
+          pos[0] > -120 && pos[0] < WIDTH + 120 &&
+          pos[1] > -120 && pos[1] < HEIGHT + 120,
+      );
+    return computeLabelOffsets(points);
+  }, [selectedId, target]);
+
+  const cityLabelOffsets = useMemo(() => {
+    if (!selectedId) return new Map();
+    const selected = visitedMap.get(selectedId);
+    if (!selected?.cities) return new Map();
+    const points = selected.cities
+      .map((city) => {
+        const proj = baseProjection(city.coords);
+        if (!proj) return null;
+        return {
+          id: city.name,
+          pos: [proj[0] * target.s + target.tx, proj[1] * target.s + target.ty],
+        };
+      })
+      .filter(Boolean);
+    return computeLabelOffsets(points);
+  }, [selectedId, target]);
 
   return (
     <div
       ref={ref}
-      className="relative w-full aspect-[16/9] rounded-2xl border border-gray-200 bg-gradient-to-br from-sky-50 to-white overflow-hidden shadow-sm scroll-mt-8"
+      className="relative w-full min-h-[420px] lg:min-h-0 lg:h-full rounded-2xl border border-gray-200 bg-gradient-to-br from-sky-50 to-white overflow-hidden shadow-sm scroll-mt-8 flex items-center justify-center"
     >
+      {/* Aspect-locked inner box so SVG content and HTML label overlays share
+          the same coordinate system regardless of the outer container's
+          aspect. */}
+      <div
+        ref={innerRef}
+        onPointerDown={handlePointerDown}
+        onPointerMove={handlePointerMove}
+        onPointerUp={handlePointerUp}
+        onPointerCancel={handlePointerUp}
+        className="relative w-full max-w-full max-h-full"
+        style={{
+          aspectRatio: `${WIDTH} / ${HEIGHT}`,
+          cursor: dragging ? 'grabbing' : 'grab',
+          touchAction: 'none',
+        }}
+      >
       <svg
         viewBox={`0 0 ${WIDTH} ${HEIGHT}`}
-        className="absolute inset-0 h-full w-full"
+        className="absolute inset-0 h-full w-full select-none"
         aria-label={
           selectedRecord
             ? `Map of ${visitedMap.get(selectedId).name}`
@@ -281,7 +464,7 @@ const TravelMap = forwardRef(function TravelMap(
               transition: 'filter 400ms ease, opacity 400ms ease',
             }}
           >
-            {countryRecords.map((r) => {
+            {countryRecords.map((r, i) => {
               if (selectedId && r.rawId === selectedId) return null;
               const isVisited = r.rawId && visitedMap.has(r.rawId);
               const isHovered = hoveredId && r.rawId === hoveredId && !selectedId;
@@ -289,7 +472,9 @@ const TravelMap = forwardRef(function TravelMap(
               if (isVisited) fill = isHovered ? '#2563eb' : '#60a5fa';
               return (
                 <path
-                  key={r.id}
+                  // Some world-atlas features share an id (or have none); pair
+                  // with the array index to guarantee uniqueness.
+                  key={`${r.id ?? 'unknown'}-${i}`}
                   d={r.d}
                   fill={fill}
                   stroke={isHovered ? '#1d4ed8' : '#ffffff'}
@@ -323,20 +508,19 @@ const TravelMap = forwardRef(function TravelMap(
 
         {/* Leader lines + pins at real country locations (world/continent views) */}
         {!selectedId &&
-          visitedMarkers.map(({ country, pinBase, labelBase }) => {
+          visitedMarkers.map(({ country, pinBase }) => {
             const [px, py] = toView(pinBase[0], pinBase[1]);
-            const [lx, ly] = toView(labelBase[0], labelBase[1]);
             if (
               px < -40 || px > WIDTH + 40 ||
               py < -40 || py > HEIGHT + 40
             ) {
               return null;
             }
-            // Line attaches to the bottom edge of the label so it visually hangs
-            // from the pin like a real tag.
+            const offset = countryLabelOffsets.get(country.id) || [0, -22];
+            const [lx, ly] = [px + offset[0], py + offset[1]];
             const lineEndY = ly + LABEL_HALF_HEIGHT;
             const isHovered = hoveredId === country.id;
-            const hasLine = !(pinBase[0] === labelBase[0] && pinBase[1] === labelBase[1]);
+            const hasLine = Math.hypot(offset[0], offset[1]) > 4;
             return (
               <g key={`pin-${country.id}`}>
                 {hasLine && (
@@ -364,13 +548,13 @@ const TravelMap = forwardRef(function TravelMap(
             );
           })}
 
-        {/* City pins + leader lines (constant screen-space offset for labels) */}
+        {/* City pins + leader lines (auto-distributed labels, screen-space) */}
         {selectedId &&
           visitedMap.get(selectedId)?.cities.map((city) => {
             const projected = baseProjection(city.coords);
             if (!projected) return null;
             const [px, py] = toView(projected[0], projected[1]);
-            const offset = city.labelOffset || [0, -20];
+            const offset = cityLabelOffsets.get(city.name) || [0, -22];
             const [lx, ly] = [px + offset[0], py + offset[1]];
             const lineEndY = ly + LABEL_HALF_HEIGHT;
             return (
@@ -396,25 +580,6 @@ const TravelMap = forwardRef(function TravelMap(
             );
           })}
       </svg>
-
-      {/* Continent labels (HTML overlay so text stays a constant size) */}
-      <div
-        className="absolute inset-0 pointer-events-none"
-        style={{
-          opacity: animating ? 0 : 1,
-          transition: 'opacity 300ms ease 200ms',
-        }}
-      >
-        {labels.map((l) => (
-          <span
-            key={`lbl-${l.id}`}
-            className="absolute -translate-x-1/2 -translate-y-1/2 text-[10px] font-medium text-gray-500 whitespace-nowrap"
-            style={toPercent(l.vx, l.vy)}
-          >
-            {l.name}
-          </span>
-        ))}
-      </div>
 
       {/* Continent tabs (hidden in country view) */}
       {!selectedId && (
@@ -447,8 +612,10 @@ const TravelMap = forwardRef(function TravelMap(
 
       {/* World / continent view: country labels anchored above their pins */}
       {!selectedId &&
-        visitedMarkers.map(({ country, labelBase }) => {
-          const [lx, ly] = toView(labelBase[0], labelBase[1]);
+        visitedMarkers.map(({ country, pinBase }) => {
+          const [px, py] = toView(pinBase[0], pinBase[1]);
+          const offset = countryLabelOffsets.get(country.id) || [0, -22];
+          const [lx, ly] = [px + offset[0], py + offset[1]];
           if (!inFrame(lx, ly)) return null;
           const isHovered = hoveredId === country.id;
           return (
@@ -489,7 +656,7 @@ const TravelMap = forwardRef(function TravelMap(
           const projected = baseProjection(city.coords);
           if (!projected) return null;
           const [px, py] = toView(projected[0], projected[1]);
-          const offset = city.labelOffset || [0, -20];
+          const offset = cityLabelOffsets.get(city.name) || [0, -22];
           const [lx, ly] = [px + offset[0], py + offset[1]];
           if (!inFrame(lx, ly)) return null;
           return (
@@ -555,14 +722,18 @@ const TravelMap = forwardRef(function TravelMap(
         </button>
         <button
           type="button"
-          onClick={() => setZoomMult(1)}
-          disabled={zoomMult === 1}
-          aria-label="Reset zoom"
-          title="Reset zoom"
+          onClick={() => {
+            setZoomMult(1);
+            setPan({ x: 0, y: 0 });
+          }}
+          disabled={zoomMult === 1 && pan.x === 0 && pan.y === 0}
+          aria-label="Reset view"
+          title="Reset view"
           className="flex h-8 w-8 items-center justify-center border-t border-gray-200 text-gray-700 hover:bg-gray-100 disabled:cursor-not-allowed disabled:text-gray-300"
         >
           <RotateCcw size={13} aria-hidden="true" />
         </button>
+      </div>
       </div>
     </div>
   );

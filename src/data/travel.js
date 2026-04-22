@@ -7,13 +7,13 @@
 // - `pinCoords` (optional) overrides where the pin is planted on the country.
 //   Defaults to the first city's coords. Use this when the first city is in a
 //   corner and you'd prefer to pin somewhere more central (e.g. Rome for Italy).
-// - `labelOffset` is the label's position *relative to the pin* in
-//   base-projection pixels. `dy` must be negative so the label floats above
-//   the pin; a leader line is drawn automatically. The offset scales with zoom
-//   so labels stay close to their country at world view and fan out at
-//   continent view.
 // - `cities` are the memories shown once a country is clicked.
 //     `coords` is [longitude, latitude] (easy to grab from Google Maps).
+//
+// Label positions are computed automatically: a pin in isolation gets its
+// label directly above it; pins that share a tight cluster get their labels
+// radially fanned out from the cluster's center so they don't overlap. Just
+// add new entries — no manual offset tuning required.
 //
 // A city qualifies if I stayed at least one night there OR made a plan to see it
 // and spent a good amount of time.
@@ -25,7 +25,6 @@ export const visitedCountries = [
     name: 'Turkey',
     sticker: { label: 'Turkey' },
     pinCoords: [32.866, 39.925], // Ankara
-    labelOffset: [6, -18],
     cities: [
       { name: 'Istanbul', coords: [28.978, 41.008] },
       { name: 'Ankara', coords: [32.866, 39.925] },
@@ -38,7 +37,6 @@ export const visitedCountries = [
     code: 'US',
     name: 'United States',
     sticker: { label: 'USA' },
-    labelOffset: [0, -16],
     cities: [
       { name: 'Chicago', coords: [-87.630, 41.878] },
       { name: 'Milwaukee', coords: [-87.906, 43.038] },
@@ -51,7 +49,6 @@ export const visitedCountries = [
     name: 'Brazil',
     sticker: { label: 'Brazil' },
     pinCoords: [-47.883, -15.793], // Brasília (central)
-    labelOffset: [0, -16],
     cities: [
       { name: 'Fortaleza', coords: [-38.527, -3.732] },
       { name: 'Rio de Janeiro', coords: [-43.196, -22.908] },
@@ -75,7 +72,6 @@ export const visitedCountries = [
     code: 'DE',
     name: 'Germany',
     sticker: { label: 'Germany' },
-    labelOffset: [6, -22],
     cities: [
       { name: 'Frankfurt', coords: [8.682, 50.110] },
       { name: 'Berlin', coords: [13.405, 52.520] },
@@ -86,7 +82,6 @@ export const visitedCountries = [
     code: 'FR',
     name: 'France',
     sticker: { label: 'France' },
-    labelOffset: [-14, -12],
     cities: [
       { name: 'Paris', coords: [2.349, 48.864] },
       { name: 'Lyon', coords: [4.835, 45.764] },
@@ -107,7 +102,6 @@ export const visitedCountries = [
     name: 'Italy',
     sticker: { label: 'Italy' },
     pinCoords: [12.496, 41.903], // Rome
-    labelOffset: [10, -12],
     cities: [
       { name: 'Pisa', coords: [10.401, 43.716] },
       { name: 'Roma', coords: [12.496, 41.903] },
@@ -125,7 +119,6 @@ export const visitedCountries = [
     code: 'VA',
     name: 'Vatican',
     sticker: { label: 'Vatican' },
-    labelOffset: [22, -4],
     cities: [{ name: 'Vatican City', coords: [12.454, 41.902] }],
   },
   {
@@ -133,7 +126,6 @@ export const visitedCountries = [
     code: 'MC',
     name: 'Monaco',
     sticker: { label: 'Monaco' },
-    labelOffset: [-14, -8],
     cities: [{ name: 'Monaco', coords: [7.422, 43.738] }],
   },
   {
@@ -142,7 +134,6 @@ export const visitedCountries = [
     name: 'Spain',
     sticker: { label: 'Spain' },
     pinCoords: [-3.703, 40.417], // Madrid
-    labelOffset: [-4, -16],
     cities: [
       { name: 'San Sebastián', coords: [-1.981, 43.319] },
       { name: 'Sevilla', coords: [-5.984, 37.389] },
@@ -155,7 +146,6 @@ export const visitedCountries = [
     code: 'NL',
     name: 'Netherlands',
     sticker: { label: 'Netherlands' },
-    labelOffset: [-6, -30],
     cities: [
       { name: 'Amsterdam', coords: [4.900, 52.370] },
       { name: 'Zaandam', coords: [4.823, 52.438] },
@@ -167,7 +157,6 @@ export const visitedCountries = [
     code: 'BE',
     name: 'Belgium',
     sticker: { label: 'Belgium' },
-    labelOffset: [-22, -14],
     cities: [
       { name: 'Brussels', coords: [4.352, 50.850] },
       { name: 'Ghent', coords: [3.725, 51.054] },
@@ -179,7 +168,6 @@ export const visitedCountries = [
     code: 'HU',
     name: 'Hungary',
     sticker: { label: 'Hungary' },
-    labelOffset: [32, -14],
     cities: [{ name: 'Budapest', coords: [19.040, 47.498] }],
   },
   {
@@ -187,7 +175,6 @@ export const visitedCountries = [
     code: 'AT',
     name: 'Austria',
     sticker: { label: 'Austria' },
-    labelOffset: [22, -10],
     cities: [
       { name: 'Wien', coords: [16.373, 48.208] },
       { name: 'Graz', coords: [15.439, 47.071] },
@@ -199,7 +186,6 @@ export const visitedCountries = [
     code: 'CZ',
     name: 'Czechia',
     sticker: { label: 'Czechia' },
-    labelOffset: [14, -20],
     cities: [
       { name: 'Praha', coords: [14.438, 50.076] },
       { name: 'Brno', coords: [16.607, 49.195] },
@@ -210,7 +196,6 @@ export const visitedCountries = [
     code: 'GR',
     name: 'Greece',
     sticker: { label: 'Greece' },
-    labelOffset: [10, -12],
     cities: [
       { name: 'Athens', coords: [23.728, 37.984] },
       { name: 'Thessaloniki', coords: [22.945, 40.640] },
@@ -225,7 +210,6 @@ export const visitedCountries = [
     name: 'Switzerland',
     sticker: { label: 'Switzerland' },
     pinCoords: [7.447, 46.948], // Bern
-    labelOffset: [-2, -26],
     cities: [
       { name: 'Zurich', coords: [8.541, 47.377] },
       { name: 'Bern', coords: [7.447, 46.948] },
@@ -241,7 +225,6 @@ export const visitedCountries = [
     code: 'RS',
     name: 'Serbia',
     sticker: { label: 'Serbia' },
-    labelOffset: [18, -10],
     cities: [{ name: 'Belgrade', coords: [20.449, 44.817] }],
   },
   {
@@ -250,7 +233,6 @@ export const visitedCountries = [
     name: 'Egypt',
     sticker: { label: 'Egypt' },
     pinCoords: [31.235, 30.044], // Cairo (more central than Dahab)
-    labelOffset: [0, -14],
     cities: [{ name: 'Dahab', coords: [34.513, 28.496] }],
   },
   {
@@ -258,7 +240,6 @@ export const visitedCountries = [
     code: 'DK',
     name: 'Denmark',
     sticker: { label: 'Denmark' },
-    labelOffset: [0, -14],
     cities: [
       { name: 'Copenhagen', coords: [12.568, 55.676] },
       { name: 'Humlebæk', coords: [12.540, 55.970] },
@@ -270,7 +251,6 @@ export const visitedCountries = [
     name: 'Paraguay',
     sticker: { label: 'Paraguay' },
     pinCoords: [-57.575, -25.264], // Asunción
-    labelOffset: [10, -10],
     cities: [{ name: 'Ciudad del Este', coords: [-54.617, -25.516] }],
   },
   {
@@ -279,12 +259,11 @@ export const visitedCountries = [
     name: 'Argentina',
     sticker: { label: 'Argentina' },
     pinCoords: [-58.381, -34.603], // Buenos Aires
-    labelOffset: [0, -14],
     cities: [{ name: 'Puerto Iguazú', coords: [-54.573, -25.601] }],
   },
 ];
 
-// Timeline of trips (for the optional "Timeline" section).
+// Timeline of trips (kept for potential future UI; not currently rendered).
 // Flags are for display; country codes reference `visitedCountries[].code`.
 export const travelTimeline = [
   { year: 2015, countries: ['US'] },
