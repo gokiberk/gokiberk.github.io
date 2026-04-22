@@ -1,55 +1,102 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<urlset xmlns="http://www.sitemaps.org/schemas/sitemap/0.9">
+<urlset
+  xmlns="http://www.sitemaps.org/schemas/sitemap/0.9"
+  xmlns:xhtml="http://www.w3.org/1999/xhtml">
   <url>
-    <loc>https://gokiberk.com</loc>
-    <lastmod>2025-05-31</lastmod>
+    <loc>https://gokiberk.com/</loc>
+    <lastmod>2026-04-22</lastmod>
+    <changefreq>monthly</changefreq>
+    <priority>1.0</priority>
   </url>
   <url>
-    <loc>https://gokiberk.com/writing</loc>
-    <lastmod>2025-05-31</lastmod>
-  </url>
-  <url>
-    <loc>https://gokiberk.com/travel</loc>
-    <lastmod>2025-05-31</lastmod>
+    <loc>https://gokiberk.com/projects</loc>
+    <lastmod>2026-04-22</lastmod>
+    <changefreq>monthly</changefreq>
+    <priority>0.7</priority>
   </url>
   <url>
     <loc>https://gokiberk.com/gallery</loc>
-    <lastmod>2025-05-31</lastmod>
+    <lastmod>2026-04-22</lastmod>
+    <changefreq>monthly</changefreq>
+    <priority>0.6</priority>
+  </url>
+  <url>
+    <loc>https://gokiberk.com/travel</loc>
+    <lastmod>2026-04-22</lastmod>
+    <changefreq>monthly</changefreq>
+    <priority>0.6</priority>
+  </url>
+  <url>
+    <loc>https://gokiberk.com/writing</loc>
+    <lastmod>2026-04-22</lastmod>
+    <changefreq>weekly</changefreq>
+    <priority>0.9</priority>
+    <xhtml:link rel="alternate" hreflang="en" href="https://gokiberk.com/writing" />
+    <xhtml:link rel="alternate" hreflang="tr" href="https://gokiberk.com/writing/tr" />
+  </url>
+  <url>
+    <loc>https://gokiberk.com/writing/tr</loc>
+    <lastmod>2026-04-22</lastmod>
+    <changefreq>weekly</changefreq>
+    <priority>0.8</priority>
+    <xhtml:link rel="alternate" hreflang="en" href="https://gokiberk.com/writing" />
+    <xhtml:link rel="alternate" hreflang="tr" href="https://gokiberk.com/writing/tr" />
+  </url>
+  <url>
+    <loc>https://gokiberk.com/writing/finike-diary</loc>
+    <lastmod>2025-06-04</lastmod>
+    <priority>0.7</priority>
+    <xhtml:link rel="alternate" hreflang="en" href="https://gokiberk.com/writing/finike-diary" />
+    <xhtml:link rel="alternate" hreflang="tr" href="https://gokiberk.com/writing/tr/finike-gunlugu" />
+  </url>
+  <url>
+    <loc>https://gokiberk.com/writing/tr/finike-gunlugu</loc>
+    <lastmod>2025-06-04</lastmod>
+    <priority>0.7</priority>
+    <xhtml:link rel="alternate" hreflang="en" href="https://gokiberk.com/writing/finike-diary" />
+    <xhtml:link rel="alternate" hreflang="tr" href="https://gokiberk.com/writing/tr/finike-gunlugu" />
   </url>
   <url>
     <loc>https://gokiberk.com/writing/trip-to-italy</loc>
     <lastmod>2025-05-31</lastmod>
+    <priority>0.7</priority>
+    <xhtml:link rel="alternate" hreflang="en" href="https://gokiberk.com/writing/trip-to-italy" />
+    <xhtml:link rel="alternate" hreflang="tr" href="https://gokiberk.com/writing/tr/italya-seyahati" />
   </url>
   <url>
     <loc>https://gokiberk.com/writing/tr/italya-seyahati</loc>
     <lastmod>2025-05-31</lastmod>
+    <priority>0.7</priority>
+    <xhtml:link rel="alternate" hreflang="en" href="https://gokiberk.com/writing/trip-to-italy" />
+    <xhtml:link rel="alternate" hreflang="tr" href="https://gokiberk.com/writing/tr/italya-seyahati" />
   </url>
   <url>
     <loc>https://gokiberk.com/writing/erasmus-in-paris</loc>
     <lastmod>2025-05-31</lastmod>
+    <priority>0.7</priority>
+    <xhtml:link rel="alternate" hreflang="en" href="https://gokiberk.com/writing/erasmus-in-paris" />
+    <xhtml:link rel="alternate" hreflang="tr" href="https://gokiberk.com/writing/tr/pariste-erasmus" />
   </url>
   <url>
     <loc>https://gokiberk.com/writing/tr/pariste-erasmus</loc>
     <lastmod>2025-05-31</lastmod>
+    <priority>0.7</priority>
+    <xhtml:link rel="alternate" hreflang="en" href="https://gokiberk.com/writing/erasmus-in-paris" />
+    <xhtml:link rel="alternate" hreflang="tr" href="https://gokiberk.com/writing/tr/pariste-erasmus" />
   </url>
   <url>
     <loc>https://gokiberk.com/writing/2024-year-in-review</loc>
     <lastmod>2025-05-31</lastmod>
+    <priority>0.6</priority>
   </url>
   <url>
     <loc>https://gokiberk.com/writing/2023-year-in-review</loc>
     <lastmod>2025-05-31</lastmod>
+    <priority>0.6</priority>
   </url>
   <url>
     <loc>https://gokiberk.com/writing/first-week-in-brazil</loc>
     <lastmod>2025-05-31</lastmod>
-  </url>
-    <url>
-    <loc>https://gokiberk.com/writing/tr/finike-gunlugu</loc>
-    <lastmod>2025-06-04</lastmod>
-  </url>
-    <url>
-    <loc>https://gokiberk.com/writing/finike-diary</loc>
-    <lastmod>2025-06-04</lastmod>
+    <priority>0.6</priority>
   </url>
 </urlset>

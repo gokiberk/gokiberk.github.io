@@ -11,7 +11,8 @@
     "title": "Transkriptor Landing Page",
     "description": "Landing pages and blogs built with Next.js.",
     "url": "https://transkriptor.com",
-    "image": "https://transkriptor.com/img/homepageThumbnail.webp"
+    "image": "/img/transkriptor.webp",
+    "nofollow": true
   },
   {
     "id": "socoolbus",

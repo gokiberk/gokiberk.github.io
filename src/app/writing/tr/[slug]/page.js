@@ -4,7 +4,7 @@ import allUrls from '@/data/allUrls.json'; // Import allUrls
 import { generateMetadata as generateBlogMetadata } from '@/components/BlogHeadComponent';
 
 export async function generateMetadata({ params }) {
-  const slug = params.slug;
+  const { slug } = await params;
   const lang = 'tr';
   const contentId = Object.entries(allUrls).find(([id, urls]) => 
     urls.tr === slug
@@ -42,12 +42,12 @@ export async function generateMetadata({ params }) {
     twitterHandle: "@gokiberk",
     authorName: "Gökberk Keskinkılıç",
     authorUrl: "https://gokiberk.com",
-    authorImage: "/img/author.jpg"
+    authorImage: "/img/me.avif"
   });
 }
 
 export default async function WritingEntryPageTR({ params }) {
-  const slug = params.slug;
+  const { slug } = await params;
   const lang = 'tr';
 
   // Find the contentId for the current Turkish slug

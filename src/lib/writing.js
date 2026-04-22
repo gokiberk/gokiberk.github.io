@@ -36,6 +36,8 @@ export function getAllWritingEntriesMetadata() {
       title: jsonData.title,
       date: jsonData.date,
       dateISO: jsonData.dateISO,
+      featuredImage: jsonData.featuredImage || null,
+      excerpt: jsonData.excerpt || jsonData.metaDescription || null,
       hasTranslation,
       trSlug,
       language: 'en',
@@ -53,6 +55,8 @@ export function getAllWritingEntriesMetadata() {
       title: jsonData.title,
       date: jsonData.date,
       dateISO: jsonData.dateISO,
+      featuredImage: jsonData.featuredImage || null,
+      excerpt: jsonData.excerpt || jsonData.metaDescription || null,
       hasTranslation: false, // Optionally update if you want to check for EN translation
       trSlug: null,
       language: 'tr',

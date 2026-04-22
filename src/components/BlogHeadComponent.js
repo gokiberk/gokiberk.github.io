@@ -1,5 +1,3 @@
-import { Metadata } from 'next';
-
 export function generateMetadata({
   title = 'My Personal Blog',
   metaDescription = 'Welcome to my personal blog where I share my thoughts, experiences, and adventures.',
@@ -250,9 +248,6 @@ export function generateMetadata({
       ...(category && { 'article:section': category }),
       ...(tags.length > 0 && { 'article:tag': tags.join(', ') }),
       ...(readingTime && { 'reading-time': `${readingTime} min read` }),
-    },
-    verification: {
-      google: 'your-google-site-verification',
     },
   };
 

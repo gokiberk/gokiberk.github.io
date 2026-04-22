@@ -1,89 +1,19 @@
-'use client';
+import GalleryClient from "@/components/GalleryClient";
 
-import { SideMenu } from "@/components/SideMenu";
-import { PageTitle } from "@/components/PageTitle";
-import Img from 'next/image';
-import { useState, useEffect } from 'react';
-import Head from 'next/head';
+export const metadata = {
+  title: "Gallery",
+  description:
+    "Photo gallery by Gökberk Keskinkılıç — portraits, travel moments, and everyday life.",
+  alternates: { canonical: "/gallery" },
+  openGraph: {
+    title: "Gallery | Gökberk Keskinkılıç",
+    description:
+      "Photo gallery by Gökberk Keskinkılıç — portraits, travel moments, and everyday life.",
+    url: "https://gokiberk.com/gallery",
+    images: ["/img/og-gokiberk.webp"],
+  },
+};
 
-export default function Gallery() {
-  const [isMobile, setIsMobile] = useState(false);
-  const [isSidebarCollapsed, setIsSidebarCollapsed] = useState(false);
-
-  useEffect(() => {
-    const handleResize = () => {
-      setIsMobile(window.innerWidth < 1300);
-    };
-    handleResize(); // Set initial value
-    window.addEventListener('resize', handleResize);
-    return () => window.removeEventListener('resize', handleResize);
-  }, []);
-
-  const toggleMenu = () => setIsSidebarCollapsed(!isSidebarCollapsed);
-
-  return (
-    <>
-    <Head>
-      <title>Travel | Gökberk Keskinkılıç</title>
-      <meta name="description" content="Gallery by Gökberk Keskinkılıç." />
-      <meta property="og:title" content="Gallery | Gökberk Keskinkılıç" />
-      <meta property="og:description" content="Gallery by Gökberk Keskinkılıç." />
-      <meta property="og:image" content="/img/og-gokiberk.webp" />
-      <link rel="canonical" href="https://gokiberk.com/gallery" />
-    </Head>
-    <div className="flex flex-col md:flex-row min-h-screen">
-      {/* Sidebar */}
-      <SideMenu
-        isMobile={isMobile}
-        isCollapsed={isSidebarCollapsed}
-        onToggleCollapse={toggleMenu}
-      />
-
-      {/* Main Content */}
-      <main className="flex-1 overflow-y-auto pt-16 md:pt-0 transition-all duration-300 md:ml-64">
-        <div className="p-4 md:p-8 lg:p-12 max-w-5xl mx-auto">
-          <PageTitle title="Gallery" className="lg hidden" />
-
-          {/* Full Card Section */}
-          <div className="bg-gradient-to-b from-white-900 via-black-700 to-white-500 text-white p-8 rounded-lg shadow-lg max-w-5xl mx-auto">
-            {/* Title Section */}
-            <h1 className="text-3xl font-extrabold text-black text-center mb-6">
-              Waiting for my lab to develop some photos...
-            </h1>
-            <div className="flex justify-center m-4">
-              <Img
-                src="/gallery/engagement.jpg"
-                alt="Photography"
-                width={800}
-                height={1200}
-                className="animate-reveal"
-                nopin="nopin"
-              />
-            </div>
-            <div className="flex justify-center m-4">
-              <Img
-                src="/gallery/erdemesiee.jpg"
-                alt="Photography"
-                width={800}
-                height={1200}
-                className="animate-reveal"
-                nopin="nopin"
-              />
-            </div>
-            <div className="flex justify-center m-4">
-              <Img
-                src="/gallery/balat.jpg"
-                alt="Photography"
-                width={800}
-                height={1200}
-                className="animate-reveal"
-                nopin="nopin"
-              />
-            </div>
-          </div>
-        </div>
-      </main>
-    </div>
-    </>
-  );
+export default function GalleryPage() {
+  return <GalleryClient />;
 }

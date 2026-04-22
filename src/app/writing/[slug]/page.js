@@ -8,7 +8,7 @@ import allUrls from '@/data/allUrls.json';
 import { generateMetadata as generateBlogMetadata } from '@/components/BlogHeadComponent';
 
 export async function generateMetadata({ params }) {
-  const { slug } = params;
+  const { slug } = await params;
   const lang = 'en';
   const contentId = Object.keys(allUrls).find(key => key === slug);
 
@@ -42,16 +42,15 @@ export async function generateMetadata({ params }) {
     twitterHandle: "@gokiberk",
     authorName: "Gökberk Keskinkılıç",
     authorUrl: "https://gokiberk.com",
-    authorImage: "/img/author.jpg"
+    authorImage: "/img/me.avif"
   });
 }
 
 // This is now a Server Component
 // Async function is needed to await data fetching
 export default async function WritingEntryPage({ params }) {
-  // In a Server Component, params is directly available (or will be a Promise handled by React.use implicitly by Next.js)
-  const { slug } = params; // Access the slug directly from params
-  const lang = 'en'; // Default to English
+  const { slug } = await params;
+  const lang = 'en';
 
   // Find the contentId for the current English slug
   // In allUrls, the key is the English slug/contentId

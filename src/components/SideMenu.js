@@ -37,6 +37,7 @@ export const SideMenu = () => {
       {/* Sidebar */}
       {/* Show sidebar from md breakpoint (768px) upwards */}
       <aside
+        aria-label="Primary navigation"
         className={`fixed bg-gray-50 flex flex-col transform transition-transform duration-300 z-40 
           ${isMobile
             ? // Mobile styles: bottom slide-up menu, collapsed by default
